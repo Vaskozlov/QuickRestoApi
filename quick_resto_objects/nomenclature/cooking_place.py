@@ -1,8 +1,22 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+from quick_resto_objects.store.store import Store
 
 
 class CookingPlace(QuickRestoObject):
-    def __init__(self, sendSignal: bool, **kwargs):
-        super().__init__(**kwargs)
-        self._send_signal = sendSignal
+    @property
+    def send_signal(self) -> bool:
+        return self._send_signal
 
+    @property
+    def store(self) -> Store:
+        return self._store
+
+    @property
+    def title(self) -> str:
+        return self._title
+
+    def __init__(self, sendSignal: bool, store: dict, title: str, **kwargs):
+        super().__init__(className="warehouse.nomenclature.cookingPlace",**kwargs)
+        self._send_signal: bool = sendSignal
+        self._store: Store = Store(**store)
+        self._title: str = title

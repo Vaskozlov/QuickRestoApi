@@ -20,7 +20,7 @@ class QuickRestoApiException(BaseException):
         self._response: requests.Response = response
         self._status: int = response.status_code
         self._message: str = self._prettify_message()
-        super().__init__(f"Https code is {self.status}.\nMessage from server:\n{self.message}")
+        super().__init__(f"Http code is {self.status}.\nMessage from server:\n{self.message}")
 
     def _prettify_message(self) -> str:
         try:

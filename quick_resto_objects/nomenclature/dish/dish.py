@@ -1,6 +1,7 @@
-from quick_resto_objects.quick_resto_object import *
-from quick_resto_objects.measureunits.measure_unit import MeasureType, MeasureUnit
-from quick_resto_objects.dish.dish_category import convert_str_to_selling_type, SellingType
+from quick_resto_objects.quick_resto_object import QuickRestoObject
+from quick_resto_objects.nomenclature.dish.dish_sales import DishSale
+from quick_resto_objects.measureunits.measure_unit import MeasureUnit
+from quick_resto_objects.nomenclature.dish.dish_category import convert_str_to_selling_type, SellingType
 
 
 class Dish(QuickRestoObject):
@@ -71,7 +72,7 @@ class Dish(QuickRestoObject):
         super().__init__(**kwargs)
         self._article: int = int(article)
         self._base_price_in_list: float = basePriceInList
-        self._dish_sales: list = dishSales
+        self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
         self._display_on_terminal: bool = displayOnTerminal
         self._exclude_discount: bool = excludeDiscount
         self._exclude_markup: bool = excludeMarkup
