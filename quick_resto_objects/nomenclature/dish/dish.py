@@ -69,7 +69,9 @@ class Dish(QuickRestoObject):
                  excludeDiscount: bool, excludeMarkup: bool, measureUnit: dict, minimalPrice: float, name: str,
                  pack: float, price: float, ratio: float, recipe: str, sellingType: str, storeQuantityKg: float,
                  **kwargs):
-        super().__init__(**kwargs)
+        class_name: str = "modules.warehouse.nomenclature.Dish"
+
+        super().__init__(class_name=class_name, **kwargs)
         self._article: int = int(article)
         self._base_price_in_list: float = basePriceInList
         self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]

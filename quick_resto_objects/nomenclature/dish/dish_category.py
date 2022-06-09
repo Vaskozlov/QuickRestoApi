@@ -51,7 +51,9 @@ class DishCategory(QuickRestoObject):
 
     def __init__(self, itemTitle: str, name: str, displayOnTerminal: bool, color: str, sellingType: str,
                  measureUnit: dict, **kwargs):
-        super().__init__(**kwargs)
+        class_name: str = "modules.core.dictionaries.measureunits.MeasureUnit"
+
+        super().__init__(class_name=class_name, **kwargs)
         self._title: str = itemTitle
         self._name: str = name
         self._color: str = color

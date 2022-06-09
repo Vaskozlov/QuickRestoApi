@@ -1,4 +1,22 @@
+from enum import Enum
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
+
+class TableShape(Enum):
+    RECT = 'RECT'
+    NONE = 'NONE'
+
+
+StrToTableShape = {
+    TableShape.RECT.value: TableShape.RECT
+}
+
+
+def convert_str_to_selling_type(table_shape: str) -> TableShape:
+    if table_shape in StrToTableShape.keys():
+        return StrToTableShape[table_shape]
+
+    return TableShape.NONE
 
 
 class Table(QuickRestoObject):
@@ -47,7 +65,7 @@ class Table(QuickRestoObject):
         return self._reservable
 
     @property
-    def shape(self) -> str:
+    def shape(self) -> TableShape:
         return self._shape
 
     @property
@@ -69,5 +87,5 @@ class Table(QuickRestoObject):
         self._min_capacity: int = minCapacity
         self._max_capacity: int = maxCapacity
         self._reservable: bool = reservable
-        self._shape: str = shape
         self._title: str = title
+        self._shape: TableShape = convert_str_to_selling_type(shape)

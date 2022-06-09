@@ -5,7 +5,9 @@ class TableScheme(QuickRestoObject):
     def __init__(self, currentLoad: int, deleted: bool, width: int, height: int, itemTitle: str, maxCapacity: int,
                  name: str,
                  reservations: list, **kwargs):
-        super().__init__(className="modules.front.tablemanagement.TableScheme", **kwargs)
+        class_name = "modules.front.tablemanagement.TableScheme"
+
+        super().__init__(class_name=class_name, **kwargs)
         self._current_load: int = currentLoad
         self._deleted: bool = deleted
         self._width: int = width

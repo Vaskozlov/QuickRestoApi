@@ -18,6 +18,13 @@ IdToMeasureType = {
 }
 
 
+def convert_id_to_measure_unit(measure_unit_id: id) -> IdToMeasureType:
+    if measure_unit_id in IdToMeasureType.keys():
+        return IdToMeasureType[measure_unit_id]
+
+    return MeasureType.NONE
+
+
 class MeasureUnit(QuickRestoObject):
     @property
     def measure_type(self) -> MeasureType:
@@ -25,11 +32,4 @@ class MeasureUnit(QuickRestoObject):
 
     def __init__(self, id: int, className: str):
         super().__init__(id, className)
-        self._measure_type: MeasureType = self._convert_id_to_measure_unit(id)
-
-    @staticmethod
-    def _convert_id_to_measure_unit(measure_unit_id: id) -> IdToMeasureType:
-        if measure_unit_id in IdToMeasureType.keys():
-            return IdToMeasureType[measure_unit_id]
-
-        return MeasureType.NONE
+        self._measure_type: MeasureType = convert_id_to_measure_unit(id)

@@ -2,6 +2,7 @@ import requests
 from pprint import pprint
 from enum import Enum
 from quick_resto_api import QuickRestoApi
+from quick_resto_objects.store.store import Store
 from quick_resto_objects.nomenclature.dish.dish import Dish
 from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
 
@@ -29,8 +30,14 @@ class QuickRestoInterface:
         # TODO: add good error message for this case
         self._api.get("ping")
 
-    def get_stores(self) -> dict:
-        return self._get_system_object("warehouse.store").json()
+    def get_stores(self) -> set:
+        stores = set()
+
+        for store in self._get_system_object("warehouse.store").json():
+            if 'Store' in store['className']:
+                stores.add(Store(**store))
+
+        return stores
 
     def get_dishes(self) -> set:
         dishes = set()

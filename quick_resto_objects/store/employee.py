@@ -15,7 +15,8 @@ class Employee(QuickRestoObject):
         return self._short_name
 
     def __init__(self, name: str, nds: bool, shortName: str, **kwargs):
-        super().__init__(className="modules.warehouse.store.employee.Employee", **kwargs)
+        class_name: str = "modules.warehouse.store.employee.Employee"
+        super().__init__(class_name=class_name, **kwargs)
         self._name: str = name
         self._nds: bool = nds
         self._short_name: str = shortName

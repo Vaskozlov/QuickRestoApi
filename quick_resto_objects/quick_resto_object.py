@@ -21,10 +21,15 @@ class QuickRestoObject(object):
     def __repr__(self) -> str:
         return json.dumps(self, cls=QuickRestoObjectEncoder, indent=4, ensure_ascii=False)
 
-    def __init__(self, id: int, className: str, _id: int = 0, **kwargs):
+    def __init__(self, id: int, class_name: str, className: str = "", _id: int = 0, **kwargs):
         self._object_id: int = id
         self._global_id: int = _id
-        self._class_name: str = className
+
+        # Server do not always return className
+        if className == "":
+            self._class_name: str = class_name
+        else:
+            self._class_name: str = className
 
 
 class QuickRestoObjectEncoder(json.JSONEncoder):
