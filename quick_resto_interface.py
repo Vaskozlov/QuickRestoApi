@@ -1,8 +1,8 @@
 import requests
-from pprint import pprint
 from enum import Enum
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.store.store import Store
+from quick_resto_objects.crm.customer.customer import CrmCustomer
 from quick_resto_objects.nomenclature.dish.dish import Dish
 from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
 
