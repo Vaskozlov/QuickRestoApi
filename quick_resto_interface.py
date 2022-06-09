@@ -1,6 +1,9 @@
 import requests
+from pprint import pprint
 from enum import Enum
 from quick_resto_api import QuickRestoApi
+from quick_resto_objects.nomenclature.dish.dish import Dish
+from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
 
 
 class TokenType(Enum):
@@ -29,8 +32,16 @@ class QuickRestoInterface:
     def get_stores(self) -> dict:
         return self._get_system_object("warehouse.store").json()
 
-    def get_dishes(self) -> dict:
-        return self._get_system_object("warehouse.nomenclature.dish").json()
+    def get_dishes(self) -> set:
+        dishes = set()
+
+        for dish in self._get_system_object("warehouse.nomenclature.dish").json():
+            if 'DishCategory' in dish['className']:
+                dishes.add(DishCategory(**dish))
+            elif 'Dish' in dish['className']:
+                dishes.add(Dish(**dish))
+
+        return dishes
 
     def get_table_orders(self) -> dict:
         return self._get_system_object("front.tableorders").json()

@@ -7,7 +7,7 @@ class SalePlace(QuickRestoObject):
                  maxTableOrderNumberEnable: bool, openCashBoxOnGuestTickets: bool, openCashBoxOnPrechecks: bool,
                  openCashBoxOnReports: bool, printGuestTicket: bool, printKitchenTicket: bool, services: list,
                  tableScheme: dict, title: str, **kwargs):
-        super().__init__(className="warehouse.nomenclature.salePlace", **kwargs)
+        super().__init__(className="modules.warehouse.nomenclature.salePlace", **kwargs)
         self._automatic_encashment: bool = automaticEncashment
         self._can_hold_table_orders: bool = canHoldTableOrders
         self._default_cooking_place: CookingPlace = CookingPlace(**defaultCookingPlace)

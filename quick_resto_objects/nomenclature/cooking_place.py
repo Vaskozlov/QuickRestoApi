@@ -16,7 +16,7 @@ class CookingPlace(QuickRestoObject):
         return self._title
 
     def __init__(self, sendSignal: bool, store: dict, title: str, **kwargs):
-        super().__init__(className="warehouse.nomenclature.cookingPlace",**kwargs)
+        super().__init__(className="modules.warehouse.nomenclature.cookingPlace", **kwargs)
         self._send_signal: bool = sendSignal
         self._store: Store = Store(**store)
         self._title: str = title

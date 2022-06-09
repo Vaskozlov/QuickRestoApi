@@ -20,7 +20,7 @@ class Store(QuickRestoObject):
         return self._employee
 
     def __init__(self, description: str, liteBusiness: dict, storeCode: str, title: str, **kwargs):
-        super().__init__(className="warehouse.nomenclature.store.store", **kwargs)
+        super().__init__(className="modules.warehouse.nomenclature.store.store", **kwargs)
         self._title: str = title
         self._description: str = description
         self._store_code: int = int(storeCode)
