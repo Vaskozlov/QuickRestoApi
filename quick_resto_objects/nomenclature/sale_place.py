@@ -1,5 +1,6 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 from quick_resto_objects.nomenclature.cooking_place import CookingPlace
+from quick_resto_objects.tablemanagement.table_scheme import TableScheme
 
 
 class SalePlace(QuickRestoObject):
@@ -21,3 +22,4 @@ class SalePlace(QuickRestoObject):
         self._print_kitchen_ticket: bool = printKitchenTicket
         self._services: list = services
         self._title: str = title
+        self._table: TableScheme = TableScheme(**tableScheme)

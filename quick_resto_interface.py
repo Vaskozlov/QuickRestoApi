@@ -1,3 +1,5 @@
+import pprint
+
 import requests
 from enum import Enum
 from quick_resto_api import QuickRestoApi
@@ -41,8 +43,9 @@ class QuickRestoInterface:
 
     def get_dishes(self) -> set:
         dishes = set()
+        json_data = self._get_system_object("warehouse.nomenclature.dish").json()
 
-        for dish in self._get_system_object("warehouse.nomenclature.dish").json():
+        for dish in json_data:
             if 'DishCategory' in dish['className']:
                 dishes.add(DishCategory(**dish))
             elif 'Dish' in dish['className']:

@@ -12,7 +12,7 @@ StrToTableShape = {
 }
 
 
-def convert_str_to_selling_type(table_shape: str) -> TableShape:
+def convert_str_to_table_shape(table_shape: str) -> TableShape:
     if table_shape in StrToTableShape.keys():
         return StrToTableShape[table_shape]
 
@@ -75,7 +75,9 @@ class Table(QuickRestoObject):
     def __init__(self, angle: int, deleted: bool, width: int, height: int, isBusy: bool, itemTitle: str,
                  minCapacity: int, maxCapacity: int, reservable: bool, shape: str, title: str, x: int, y: int,
                  **kwargs):
-        super().__init__(className="modules.front.tablemanagement.Table", **kwargs)
+        class_name = "modules.front.tablemanagement.Table"
+
+        super().__init__(class_name=class_name, **kwargs)
         self._angle: int = angle
         self._deleted: bool = deleted
         self._x: int = x
@@ -88,4 +90,4 @@ class Table(QuickRestoObject):
         self._max_capacity: int = maxCapacity
         self._reservable: bool = reservable
         self._title: str = title
-        self._shape: TableShape = convert_str_to_selling_type(shape)
+        self._shape: TableShape = convert_str_to_table_shape(shape)
