@@ -1,26 +1,12 @@
 import pprint
 
 import requests
-from enum import Enum
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.store.store import Store
-from quick_resto_objects.crm.customer.customer import CrmCustomer
 from quick_resto_objects.nomenclature.dish.dish import Dish
+from quick_resto_objects.crm.customer.token_types import TokenType, EntryType
+from quick_resto_objects.crm.customer.customer import CrmCustomer
 from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
-
-
-class TokenType(Enum):
-    PIN = "pin"
-    CARD = "card"
-    PHONE = "phone"
-    QR_GUEST = "qrGuest"
-
-
-class EntryType(Enum):
-    BAR_CODE = "barCode"
-    TRACK_CODE = "trackCode"
-    QR_CODE = "qrCode"
-    MANUAL = "manual"
 
 
 class QuickRestoInterface:
@@ -43,9 +29,9 @@ class QuickRestoInterface:
 
     def get_dishes(self) -> set:
         dishes = set()
-        json_data = self._get_system_object("warehouse.nomenclature.dish").json()
+        json_response = self._get_system_object("warehouse.nomenclature.dish").json()
 
-        for dish in json_data:
+        for dish in json_response:
             if 'DishCategory' in dish['className']:
                 dishes.add(DishCategory(**dish))
             elif 'Dish' in dish['className']:
@@ -66,7 +52,7 @@ class QuickRestoInterface:
         return self._api.get(f"api/list?moduleName={url}")
 
     def get_customer_info(self, key: str, token_type: TokenType = TokenType.CARD,
-                          entry_type: EntryType = EntryType.TRACK_CODE) -> dict:
+                          entry_type: EntryType = EntryType.TRACK_CODE) -> CrmCustomer:
         json_data = {
             "customerToken": {
                 "type": token_type.value,
@@ -75,7 +61,8 @@ class QuickRestoInterface:
             }
         }
 
-        return self._api.post("bonuses/customerInfo", json_data=json_data).json()
+        json_response = self._api.post("bonuses/customerInfo", json_data=json_data).json()
+        return CrmCustomer(**json_response)
 
     def search_client(self, search: str) -> dict:
         json_data = {
