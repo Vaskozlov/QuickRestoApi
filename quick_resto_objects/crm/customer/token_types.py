@@ -33,14 +33,18 @@ StrToCrmCustomerEntryType = {
 
 
 def convert_str_to_crm_token_type(crm_token_type: str) -> TokenType:
-    if crm_token_type in StrToCrmCustomerTokenType.keys():
-        return StrToCrmCustomerTokenType[crm_token_type]
+    crm_token_type = crm_token_type.upper()
+
+    if crm_token_type in TokenType.__members__.keys():
+        return TokenType.__members__[crm_token_type]
 
     return TokenType.NONE
 
 
 def convert_str_to_crm_entry_type(crm_entry_type: str) -> EntryType:
-    if crm_entry_type in StrToCrmCustomerEntryType.keys():
-        return StrToCrmCustomerEntryType[crm_entry_type]
+    crm_entry_type = crm_entry_type.upper()
+
+    if crm_entry_type in EntryType.__members__.keys():
+        return EntryType.__members__[crm_entry_type]
 
     return EntryType.NONE

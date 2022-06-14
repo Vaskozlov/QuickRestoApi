@@ -13,8 +13,10 @@ StrToTableShape = {
 
 
 def convert_str_to_table_shape(table_shape: str) -> TableShape:
-    if table_shape in StrToTableShape.keys():
-        return StrToTableShape[table_shape]
+    table_shape = table_shape.upper()
+
+    if table_shape in TableShape.__members__.keys():
+        return TableShape.__members__[table_shape]
 
     return TableShape.NONE
 

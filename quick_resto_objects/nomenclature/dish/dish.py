@@ -2,6 +2,7 @@ from quick_resto_objects.quick_resto_object import QuickRestoObject
 from quick_resto_objects.nomenclature.dish.dish_sales import DishSale
 from quick_resto_objects.measureunits.measure_unit import MeasureUnit
 from quick_resto_objects.nomenclature.dish.dish_category import convert_str_to_selling_type, SellingType
+from quick_resto_objects.store.item_tag import ItemTag
 
 
 class Dish(QuickRestoObject):
@@ -54,6 +55,10 @@ class Dish(QuickRestoObject):
         return self._ratio
 
     @property
+    def title(self) -> str:
+        return self._title
+
+    @property
     def recipe(self) -> str:
         return self._recipe
 
@@ -67,8 +72,8 @@ class Dish(QuickRestoObject):
 
     def __init__(self, article: str, basePriceInList: float, dishSales: list, displayOnTerminal: bool,
                  excludeDiscount: bool, excludeMarkup: bool, measureUnit: dict, minimalPrice: float, name: str,
-                 pack: float, price: float, ratio: float, recipe: str, sellingType: str, storeQuantityKg: float,
-                 **kwargs):
+                 pack: float, ratio: float, recipe: str, sellingType: str, storeQuantityKg: float, price: float = 0.0,
+                 itemTitle: str = "", storeItemTag=None, **kwargs):
         class_name: str = "modules.warehouse.nomenclature.Dish"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -85,5 +90,11 @@ class Dish(QuickRestoObject):
         self._price: float = price
         self._ratio: float = ratio
         self._recipe: str = recipe
+        self._title: str = itemTitle
         self._selling_type: SellingType = convert_str_to_selling_type(sellingType)
         self._store_quantity_kg: float = storeQuantityKg
+
+        if storeItemTag is None:
+            self._store_item_tag = None
+        else:
+            self._store_item_tag = ItemTag(**storeItemTag)

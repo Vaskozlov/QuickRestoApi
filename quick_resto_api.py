@@ -43,10 +43,10 @@ class QuickRestoApi:
     def headers(self) -> dict:
         return self._headers
 
-    def __init__(self, login: str, password: str):
+    def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
         self._login: str = login
         self._password: str = password
-        self._base_url: str = f'https://{login}.quickresto.ru/platform/online/'
+        self._base_url: str = f'http{"s" * use_https}://{login}.{layer}/platform/online/'
         self._auth_data: HTTPBasicAuth = HTTPBasicAuth(self._login, self._password)
         self._headers: dict = {
             "Content-type": "application/json",

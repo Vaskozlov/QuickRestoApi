@@ -1,5 +1,6 @@
 from enum import Enum
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+from quick_resto_objects.nomenclature.dish.dish_sales import DishSale
 from quick_resto_objects.measureunits.measure_unit import MeasureType, MeasureUnit
 
 
@@ -50,7 +51,7 @@ class DishCategory(QuickRestoObject):
         return self._selling_type
 
     def __init__(self, itemTitle: str, name: str, displayOnTerminal: bool, color: str, sellingType: str,
-                 measureUnit: dict, **kwargs):
+                 measureUnit: dict, dishSales=None, **kwargs):
         class_name: str = "modules.core.dictionaries.measureunits.MeasureUnit"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -60,3 +61,8 @@ class DishCategory(QuickRestoObject):
         self._display_on_terminal: bool = displayOnTerminal
         self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
         self._selling_type: SellingType = convert_str_to_selling_type(sellingType)
+
+        if dishSales is None:
+            self._dish_sales = None
+        else:
+            self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]

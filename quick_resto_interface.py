@@ -1,5 +1,3 @@
-import pprint
-
 import requests
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.store.store import Store
@@ -7,11 +5,12 @@ from quick_resto_objects.nomenclature.dish.dish import Dish
 from quick_resto_objects.crm.customer.token_types import TokenType, EntryType
 from quick_resto_objects.crm.customer.customer import CrmCustomer
 from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
+from quick_resto_objects.nomenclature.singleproduct import SingleProduct
 
 
 class QuickRestoInterface:
-    def __init__(self, login, password):
-        self._api: QuickRestoApi = QuickRestoApi(login, password)
+    def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
+        self._api: QuickRestoApi = QuickRestoApi(login, password, use_https, layer)
         self._ping()
 
     def _ping(self) -> None:
@@ -42,8 +41,14 @@ class QuickRestoInterface:
     def get_table_orders(self) -> dict:
         return self._get_system_object("front.tableorders").json()
 
-    def get_products(self) -> dict:
-        return self._get_system_object("warehouse.nomenclature.singleproduct").json()
+    def get_products(self) -> set:
+        products = set()
+        json_response = self._get_system_object("warehouse.nomenclature.singleproduct").json()
+
+        for product in json_response:
+            products.add(SingleProduct(**product))
+
+        return products
 
     def get_employees(self) -> dict:
         return self._get_system_object("personnel.employee").json()

@@ -31,8 +31,6 @@ class QuickRestoObject(object):
         else:
             self._class_name: str = className
 
-        print(kwargs)
-
 
 class QuickRestoObjectEncoder(json.JSONEncoder):
     def default(self, obj):

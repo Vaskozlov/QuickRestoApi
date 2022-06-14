@@ -1,6 +1,7 @@
 from enum import Enum
 from quick_resto_objects.crm.accounting.account.customer_account import *
 from quick_resto_objects.crm.customer.customer_token import CustomerToken
+from quick_resto_objects.crm.customer.group import Group
 from quick_resto_objects.crm.accounting.account.contact_method import ContactMethod
 
 
@@ -26,15 +27,19 @@ StrToCrmCustomerSex = {
 
 
 def convert_str_to_crm_customer_type(crm_customer_type: str) -> CrmCustomerType:
-    if crm_customer_type in StrToCrmCustomerType.keys():
-        return StrToCrmCustomerType[crm_customer_type]
+    crm_customer_type = crm_customer_type.upper()
+
+    if crm_customer_type in CrmCustomerType.__members__.keys():
+        return CrmCustomerType.__members__[crm_customer_type]
 
     return CrmCustomerType.NONE
 
 
 def convert_str_to_crm_customer_sex(crm_customer_sex: str) -> CrmCustomerSex:
-    if crm_customer_sex in StrToCrmCustomerType.keys():
-        return StrToCrmCustomerSex[crm_customer_sex]
+    crm_customer_sex = crm_customer_sex.upper()
+
+    if crm_customer_sex in CrmCustomerSex.__members__.keys():
+        return CrmCustomerSex.__members__[crm_customer_sex]
 
     return CrmCustomerSex.NONE
 
@@ -89,8 +94,8 @@ class CrmCustomer(QuickRestoObject):
         return self._customer_type
 
     def __init__(self, accounts: list, addresses: list, contactMethods: list, customerGuid: str,
-                 firstName: str, lastName: str, tokens: list, type: str, comment: str = "", middleName: str = "",
-                 sex: str = "", dateOfBirth: str = "", **kwargs):
+                 firstName: str, lastName: str, tokens: list, type: str, customerGroup: dict, comment: str = "",
+                 middleName: str = "", sex: str = "", dateOfBirth: str = "", **kwargs):
         class_name: str = 'ru.edgex.quickresto.modules.crm.customer.CrmCustomer'
 
         super().__init__(class_name=class_name, **kwargs)
@@ -106,3 +111,4 @@ class CrmCustomer(QuickRestoObject):
         self._date_of_birth: str = dateOfBirth
         self._tokens: list = [CustomerToken(**token) for token in tokens]
         self._customer_type: CrmCustomerType = convert_str_to_crm_customer_type(type)
+        self._group: Group = Group(**customerGroup)
