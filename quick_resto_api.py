@@ -58,7 +58,9 @@ class QuickRestoApi:
             url=self.base_url + url,
             headers=self.headers,
             json=json_data,
-            auth=self._auth_data
+            auth=self._auth_data,
+
+            params=parameters
         )
         self._check_response(response)
 
@@ -69,7 +71,9 @@ class QuickRestoApi:
             url=self.base_url + url,
             headers=self.headers,
             json=json_data,
-            auth=self._auth_data
+            auth=self._auth_data,
+
+            params=parameters
         )
         self._check_response(response)
 

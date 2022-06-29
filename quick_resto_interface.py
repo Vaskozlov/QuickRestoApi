@@ -1,4 +1,6 @@
+from datetime import date, datetime
 import requests
+from operations_with_objects import OperationsWithObjects
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.store.store import Store
 from quick_resto_objects.nomenclature.dish.dish import Dish
@@ -8,7 +10,7 @@ from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
 from quick_resto_objects.nomenclature.singleproduct import SingleProduct
 
 
-class QuickRestoInterface:
+class QuickRestoInterface(OperationsWithObjects):
     def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
         self._api: QuickRestoApi = QuickRestoApi(login, password, use_https, layer)
         self._ping()
@@ -16,6 +18,138 @@ class QuickRestoInterface:
     def _ping(self) -> None:
         # TODO: add good error message for this case
         self._api.get("ping")
+
+    """
+        Серверная база данных клиентов CRM и управление их бонусными счетами
+    """
+    def search_client(self, search: str) -> dict:
+        json_data = {
+            "search": search
+        }
+
+        return self._api.post("bonuses/filterCustomers", json_data=json_data).json()
+
+    def get_customer_info(self, key: str, token_type: TokenType = TokenType.CARD,
+                          entry_type: EntryType = EntryType.TRACK_CODE) -> CrmCustomer:
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            }
+        }
+
+        json_response = self._api.post("bonuses/customerInfo", json_data=json_data).json()
+        return CrmCustomer(**json_response)
+
+    def get_client_balance(self, key: str, bonus_account_type: int, token_type: TokenType = TokenType.CARD,
+                           entry_type: EntryType = EntryType.TRACK_CODE) -> dict:
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            },
+            "accountType": {
+                "accountGuid": f"bonus_account_type-{bonus_account_type}"
+            }
+        }
+
+        return self._api.post("bonuses/balance", json_data=json_data).json()
+
+    def get_operation_history(self, key: str, bonus_account_type: int, token_type: TokenType = TokenType.CARD,
+                           entry_type: EntryType = EntryType.TRACK_CODE):
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            },
+            "accountType": {
+                "accountGuid": f"bonus_account_type-{bonus_account_type}"
+            }
+        }
+
+        return self._api.post("bonuses/operationHistory", json_data = json_data).json()
+
+    def create_customer(self, customer: CrmCustomer):
+        return self._api.post("bonuses/createCustomer", json_data = customer.__str__.__dict__)
+
+    def depit_hold(self, key: str, bonus_account_type: int, amount: int, token_type: TokenType = TokenType.CARD,
+                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None):
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            },
+            "date": date,
+            "precheck": precheckID,
+            "accountType": {
+                "accountGuid": f"bonus_account_type-{bonus_account_type}"
+            },
+            "amount": amount
+        }
+
+        return self._api.post("bonuses/debitHold", json_data = json_data).json()
+
+    def credit_hold(self, key: str, bonus_account_type: int, amount: int, token_type: TokenType = TokenType.CARD,
+                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None):
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            },
+            "date": date,
+            "precheck": precheckID,
+            "accountType": {
+                "accountGuid": f"bonus_account_type-{bonus_account_type}"
+            },
+            "amount": amount
+        }
+
+        return self._api.post("bonuses/creditHold", json_data = json_data).json()
+
+    def reverse(self, key: str, bonus_account_type: int, amount: int, bonusTransactionId: int, token_type: TokenType = TokenType.CARD,
+                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None):
+        json_data = {
+            "customerToken": {
+                "type": token_type.value,
+                "entry": entry_type.value,
+                "key": key
+            },
+            "date": date,
+            "precheck": precheckID,
+            "accountType": {
+                "accountGuid": f"bonus_account_type-{bonus_account_type}"
+            },
+            "amount": amount,
+            "bonusTransactionId": bonusTransactionId
+        }
+
+        return self._api.post("bonuses/reverse", json_data = json_data).json()
+    
+
+    """
+        Модуль warehouse.nomenclature
+    """
+    def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None, 
+                                showDeleted: bool = False) -> set:
+        json_response = self.getList("warehouse.nomenclature.dish", ownerContextId, ownerContextClassName, showDeleted).json()
+
+        dishes = set()
+
+        for dish in json_response:
+            if 'DishCategory' in dish['className']:
+                dishes.add(DishCategory(**dish))
+            elif 'Dish' in dish['className']:
+                dishes.add(Dish(**dish))
+
+        return dishes
+
+
+
 
     def get_stores(self) -> set:
         stores = set()
@@ -25,18 +159,6 @@ class QuickRestoInterface:
                 stores.add(Store(**store))
 
         return stores
-
-    def get_dishes(self) -> set:
-        dishes = set()
-        json_response = self._get_system_object("warehouse.nomenclature.dish").json()
-
-        for dish in json_response:
-            if 'DishCategory' in dish['className']:
-                dishes.add(DishCategory(**dish))
-            elif 'Dish' in dish['className']:
-                dishes.add(Dish(**dish))
-
-        return dishes
 
     def get_table_orders(self) -> dict:
         return self._get_system_object("front.tableorders").json()
@@ -55,38 +177,3 @@ class QuickRestoInterface:
 
     def _get_system_object(self, url: str) -> requests.Response:
         return self._api.get(f"api/list?moduleName={url}")
-
-    def get_customer_info(self, key: str, token_type: TokenType = TokenType.CARD,
-                          entry_type: EntryType = EntryType.TRACK_CODE) -> CrmCustomer:
-        json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            }
-        }
-
-        json_response = self._api.post("bonuses/customerInfo", json_data=json_data).json()
-        return CrmCustomer(**json_response)
-
-    def search_client(self, search: str) -> dict:
-        json_data = {
-            "search": search
-        }
-
-        return self._api.post("bonuses/filterCustomers", json_data=json_data).json()
-
-    def get_client_balance(self, key: str, bonus_account_type: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE) -> dict:
-        json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            }
-        }
-
-        return self._api.post("bonuses/balance", json_data=json_data).json()
