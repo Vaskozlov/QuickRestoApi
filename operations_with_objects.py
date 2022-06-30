@@ -6,7 +6,7 @@ class OperationsWithObjects:
     def __init__(self, quick_resto_api: QuickRestoApi):
         self._api: QuickRestoApi = quick_resto_api
 
-    def getList(api: QuickRestoApi, moduleName: str, ownerContextId: int = None, 
+    def getList(self, moduleName: str, ownerContextId: int = None, 
                     ownerContextClassName: str = None, showDeleted: bool = False):
         params = {
             "moduleName": moduleName,
@@ -15,9 +15,9 @@ class OperationsWithObjects:
             "showDeleted": showDeleted
         }
 
-        return api.get("/api/list", parameters = params)
+        return self._api.get("/api/list", parameters = params)
 
-    def getTree(api: QuickRestoApi, moduleName: str, ownerContextId: int = None, 
+    def getTree(self, moduleName: str, ownerContextId: int = None, 
                     ownerContextClassName: str = None, showDeleted: bool = False):
         params = {
             "moduleName": moduleName,
@@ -26,27 +26,27 @@ class OperationsWithObjects:
             "showDeleted": showDeleted
         }
 
-        return api.get("/api/tree", parameters = params)
+        return self._api.get("/api/tree", parameters = params)
 
-    def getObject(api: QuickRestoApi, moduleName: str, objectId: int, objectRid: int = None):
+    def getObject(self, moduleName: str, objectId: int, objectRid: int = None):
         params = {
             "moduleName": moduleName,
             "objectId": objectId,
             "objectRid": objectRid
         }
 
-        return api.get("/api/get", parameters = params)
+        return self._api.get("/api/get", parameters = params)
 
-    def getObjectWithSubobjects(api: QuickRestoApi, moduleName: str, objectId: int, objectRid: int = None):
+    def getObjectWithSubobjects(self, moduleName: str, objectId: int, objectRid: int = None):
         params = {
             "moduleName": moduleName,
             "objectId": objectId,
             "objectRid": objectRid
         }
 
-        return api.get("/api/read", parameters = params)
+        return self._api.get("/api/read", parameters = params)
 
-    def createObject(api: QuickRestoApi, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
+    def createObject(self, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
                         ownerContextClassName: str = None, parentContextId: int = None, parentContextClassName: str = None):
         params = {
             "moduleName": moduleName,
@@ -58,9 +58,9 @@ class OperationsWithObjects:
 
         json_data = object.get_json_object()
 
-        return api.post("/api/create", parameters = params, json_data = json_data)
+        return self._api.post("/api/create", parameters = params, json_data = json_data)
 
-    def updateObject(api: QuickRestoApi, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
+    def updateObject(self, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
                         ownerContextClassName: str = None, parentContextId: int = None, parentContextClassName: str = None):
         params = {
             "moduleName": moduleName,
@@ -72,9 +72,9 @@ class OperationsWithObjects:
 
         json_data = object.get_json_object()
 
-        return api.post("/api/update", parameters = params, json_data = json_data)
+        return self._api.post("/api/update", parameters = params, json_data = json_data)
 
-    def removeObject(api: QuickRestoApi, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
+    def removeObject(self, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
                         ownerContextClassName: str = None, parentContextId: int = None, parentContextClassName: str = None):
         params = {
             "moduleName": moduleName,
@@ -86,9 +86,9 @@ class OperationsWithObjects:
 
         json_data = object.get_json_object()
 
-        return api.post("/api/remove", parameters = params, json_data = json_data)
+        return self._api.post("/api/remove", parameters = params, json_data = json_data)
 
-    def recoverObject(api: QuickRestoApi, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
+    def recoverObject(self, object: QuickRestoObject, moduleName: str, ownerContextId: int = None, 
                         ownerContextClassName: str = None, parentContextId: int = None, parentContextClassName: str = None):
         params = {
             "moduleName": moduleName,
@@ -100,4 +100,4 @@ class OperationsWithObjects:
 
         json_data = object.get_json_object()
 
-        return api.post("/api/recover", parameters = params, json_data = json_data)
+        return self._api.post("/api/recover", parameters = params, json_data = json_data)
