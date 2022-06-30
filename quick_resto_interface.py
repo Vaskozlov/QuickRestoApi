@@ -13,7 +13,7 @@ from quick_resto_objects.nomenclature.singleproduct import SingleProduct
 class QuickRestoInterface:
     def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
         self._api: QuickRestoApi = QuickRestoApi(login, password, use_https, layer)
-        self._operations_with_objects = OperationsWithObjects(QuickRestoApi)
+        self._operations_with_objects = OperationsWithObjects(self._api)
         self._ping()
 
     def _ping(self) -> None:
@@ -170,7 +170,7 @@ class QuickRestoInterface:
         return products
 
     def get_employees(self) -> dict:
-        return self._get_system_object("personnel.employee").json()
+        return self._operations_with_objects.getList("personnel.employee").json()
 
     def _get_system_object(self, url: str) -> requests.Response:
         return self._api.get(f"api/list?moduleName={url}")
