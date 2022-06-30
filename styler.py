@@ -1,6 +1,3 @@
-import string
-
-
 def to_snake_case(target_str: str) -> str:
     result = []
 
