@@ -1,4 +1,5 @@
 import json
+import styler
 from enum import Enum
 
 
@@ -16,13 +17,24 @@ class QuickRestoObject(object):
         return self._class_name
 
     def get_json_object(self) -> dict:
-        return self.__dict__
+        as_dict = self.__dict__
+        result = dict()
+
+        for key, value in as_dict.items():
+            parameter_name = styler.to_camel_case(key)
+
+            if issubclass(type(value), QuickRestoObject):
+                result[parameter_name] = value.get_json_object()
+            else:
+                result[parameter_name] = value
+
+        return result
 
     def __str__(self) -> str:
         return self.__repr__()
 
     def __repr__(self) -> str:
-        return json.dumps(self, cls=QuickRestoObjectEncoder, indent=4, ensure_ascii=False)
+        return json.dumps(self.get_json_object(), cls=QuickRestoObjectEncoder, indent=4, ensure_ascii=False)
 
     def __init__(self, id: int, class_name: str, className: str = "", _id: int = 0, **kwargs):
         self._object_id: int = id
