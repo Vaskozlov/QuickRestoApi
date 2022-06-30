@@ -15,6 +15,9 @@ class QuickRestoObject(object):
     def class_name(self) -> str:
         return self._class_name
 
+    def get_json_object(self) -> dict:
+        return self.__dict__
+
     def __str__(self) -> str:
         return self.__repr__()
 
