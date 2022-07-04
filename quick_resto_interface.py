@@ -2,12 +2,6 @@ from datetime import date, datetime
 import requests
 from operations_with_objects import OperationsWithObjects
 from quick_resto_api import QuickRestoApi
-from quick_resto_objects.store.store import Store
-from quick_resto_objects.nomenclature.dish.dish import Dish
-from quick_resto_objects.crm.customer.token_types import TokenType, EntryType
-from quick_resto_objects.crm.customer.customer import CrmCustomer
-from quick_resto_objects.nomenclature.dish.dish_category import DishCategory
-from quick_resto_objects.nomenclature.singleproduct import SingleProduct
 
 
 class QuickRestoInterface:
