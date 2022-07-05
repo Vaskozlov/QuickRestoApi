@@ -55,9 +55,9 @@ class ScheduledDiscount(QuickRestoObject):
     def days(self) -> list:
         return self._days
 
-    def __init__(self, name: str, deleted: bool, typeDiscount: str, value: float, categories: set, dishes: set, 
-                    tags: set, modifierGroups: list, salePlaces: set, dateRange: dict, days: list,
-                    operatorCancellable:bool, **kwargs):
+    def __init__(self, name: str=None, deleted: bool=None, typeDiscount: str=None, value: float=None, categories: set=None, dishes: set=None, 
+                    tags: set=None, modifierGroups: list=None, salePlaces: set=None, dateRange: dict=None, days: list=None,
+                    operatorCancellable:bool=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.settings.scheduled.ScheduledDiscount"
         
         super().__init__(class_name=class_name, **kwargs)
@@ -65,12 +65,12 @@ class ScheduledDiscount(QuickRestoObject):
         self._name: str = name
         self._deleted: bool = deleted
         self._type_discount: str = convert_str_to_type_discount(typeDiscount)
-        self._date_range = TimeRange(**dateRange)
+        if (dateRange!=None):self._date_range = TimeRange(**dateRange)
         self._operator_cancellable = operatorCancellable
         self._value: float = value
-        self._categories: set = [DishCategory(**category) for category in categories]
+        if (categories!=None):self._categories: set = [DishCategory(**category) for category in categories]
         self._dishes: set = [Dish(**dish) for dish in dishes]
         self._tags: set = tags
-        self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        self._sale_places: set = [SalePlace(**place) for place in salePlaces]
-        self._days: list = [Day(**day) for day in days]
+        if (modifierGroups!=None):self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        if (salePlaces!=None):self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+        if (days!=None):self._days: list = [Day(**day) for day in days]

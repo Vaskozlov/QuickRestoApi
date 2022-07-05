@@ -45,8 +45,8 @@ class OrderDiscardReason(QuickRestoObject):
     def system_order_discard_reason(self) -> SystemOrderDiscardReason:
         return self._system_order_discard_reason
 
-    def __init__(self, saveToTerminals:bool,systemOrderDiscardReason:SystemOrderDiscardReason,title:str, useComment:bool,
-                withdrawFromStore:bool,deleted:bool,**kwargs):
+    def __init__(self, saveToTerminals:bool = None,systemOrderDiscardReason:str = None,title:str = None, useComment:bool = None,
+                withdrawFromStore:bool = None,deleted:bool = None,**kwargs):
         class_name: str = "ru.edgex.quickresto.modules.core.dictionaries.orderdiscardreasons.OrderDiscardReason"
 
         super().__init__(class_name=class_name,**kwargs)
@@ -56,5 +56,5 @@ class OrderDiscardReason(QuickRestoObject):
         self._title = title
         self._use_comment = useComment
         self._withdraw_from_store = withdrawFromStore
-        self._system_order_discard_reason = systemOrderDiscardReason
+        self._system_order_discard_reason = convert_str_to_system_order_discard_reason(systemOrderDiscardReason)
     

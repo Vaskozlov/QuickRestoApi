@@ -26,8 +26,8 @@ class Role(QuickRestoObject):
     def right_links(self) -> list:
         return self._right_links
 
-    def __init__(self, systemRole: str, title: str, backOfficeUser: bool, frontOfficeUser: bool, courierUser: bool, 
-                    rightLinks: list, **kwargs):
+    def __init__(self, systemRole: str=None, title: str=None, backOfficeUser: bool=None, frontOfficeUser: bool=None, courierUser: bool=None, 
+                    rightLinks: list=None, **kwargs):
         class_name = "ru.edgex.platform.service.user.Role"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -37,4 +37,4 @@ class Role(QuickRestoObject):
         self._back_office_user: bool = backOfficeUser
         self._front_office_user: bool = frontOfficeUser
         self._courier_user: bool = courierUser
-        self._right_links: list = [RightLink(**value) for value in rightLinks]
+        if (rightLinks!=None):self._right_links: list = [RightLink(**value) for value in rightLinks]

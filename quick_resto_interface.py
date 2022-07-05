@@ -1,8 +1,13 @@
-from datetime import date, datetime
-import requests
+from datetime import date
 from operations_with_objects import OperationsWithObjects
 from quick_resto_api import QuickRestoApi
-
+from quick_resto_objects.modules.crm.accounting.account.account_type import AccountType
+from quick_resto_objects.modules.crm.accounting.balance.account_balance import AccountBalance
+from quick_resto_objects.modules.crm.customer.customer import CrmCustomer
+from quick_resto_objects.modules.crm.customer.customer_token import CustomerToken
+from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
+from quick_resto_objects.modules.warehouse.nomenclature.dish.dish_category import DishCategory
+from quick_resto_objects.quick_resto_object import QuickRestoObject
 
 class QuickRestoInterface:
     def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
@@ -19,152 +24,133 @@ class QuickRestoInterface:
             "search": search
         }
 
-        return self._api.post("bonuses/filterCustomers", json_data=json_data).json()
+        json_response = self._api.post("bonuses/filterCustomers", json_data=json_data).json()
 
-    def crm_get_customer_info(self, key: str, token_type: TokenType = TokenType.CARD,
-                          entry_type: EntryType = EntryType.TRACK_CODE) -> CrmCustomer:
+        return CrmCustomer(**json_response)
+
+    def crm_get_customer_info(self, customerToken: CustomerToken) -> CrmCustomer:
         json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            }
+            "customerToken": customerToken.get_json_object
         }
 
         json_response = self._api.post("bonuses/customerInfo", json_data=json_data).json()
 
         return CrmCustomer(**json_response)
 
-    def crm_get_client_balance(self, key: str, bonus_account_type: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE) -> dict:
+    def crm_get_client_balance(self, customerToken: CustomerToken, accountType: AccountType) -> AccountBalance:
         json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            }
+            "customerToken": customerToken.get_json_object(),
+            "accountType": accountType.get_json_object()
         }
 
-        return self._api.post("bonuses/balance", json_data=json_data).json()
+        json_response = self._api.post("bonuses/balance", json_data=json_data).json()
 
-    def crm_get_operation_history(self, key: str, bonus_account_type: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE) -> dict:
+        return AccountBalance(**json_response)
+
+    def crm_get_operation_history(self, customerToken: CustomerToken) -> dict:
         json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            }
+            "customerToken": customerToken.get_json_object()
         }
 
-        return self._api.post("bonuses/operationHistory", json_data = json_data).json()
+        json_response = self._api.post("bonuses/operationHistory", json_data = json_data).json()
+
+        return json_response
 
     def crm_create_customer(self, customer: CrmCustomer) -> CrmCustomer:
-        json_response = self._api.post("bonuses/createCustomer", json_data = customer.__str__.__dict__).json()
+        json_data = customer.get_json_object()
+
+        json_response = self._api.post("bonuses/createCustomer", json_data = json_data).json()
 
         return CrmCustomer(**json_response)
 
-    def crm_depit_hold(self, key: str, bonus_account_type: int, amount: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None) -> dict:
+    def crm_depit_hold(self, customerToken: CustomerToken, amount: int, accountType: AccountType, date: date = None, 
+                    precheck: int = None) -> dict:
         json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
+            "customerToken": customerToken.get_json_object(),
             "date": date,
-            "precheck": precheckID,
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            },
-            "amount": amount
-        }
-
-        return self._api.post("bonuses/debitHold", json_data = json_data).json()
-
-    def crm_credit_hold(self, key: str, bonus_account_type: int, amount: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None) -> dict:
-        json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
-            "date": date,
-            "precheck": precheckID,
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            },
-            "amount": amount
-        }
-
-        return self._api.post("bonuses/creditHold", json_data = json_data).json()
-
-    def crm_reverse(self, key: str, bonus_account_type: int, amount: int, bonusTransactionId: int, token_type: TokenType = TokenType.CARD,
-                           entry_type: EntryType = EntryType.TRACK_CODE, date: date = None, precheckID: int = None) -> dict:
-        json_data = {
-            "customerToken": {
-                "type": token_type.value,
-                "entry": entry_type.value,
-                "key": key
-            },
-            "date": date,
-            "precheck": precheckID,
-            "accountType": {
-                "accountGuid": f"bonus_account_type-{bonus_account_type}"
-            },
+            "precheck": precheck,
             "amount": amount,
+            "accountType": accountType.get_json_object(),
+        }
+
+        json_response = self._api.post("bonuses/debitHold", json_data = json_data).json()
+
+        return json_response
+
+    def crm_credit_hold(self, customerToken: CustomerToken, accountType: AccountType, amount: int, date: date = None, 
+                        precheck: int = None) -> dict:
+        json_data = {
+            "customerToken": customerToken.get_json_object(),
+            "date": date,
+            "precheck": precheck,
+            "amount": amount,
+            "accountType": accountType.get_json_object(),
+        }
+
+        json_response = self._api.post("bonuses/creditHold", json_data = json_data).json()
+
+        return json_response
+
+    def crm_reverse(self, customerToken: CustomerToken, accountType: AccountType, amount: int, bonusTransactionId: int, 
+                    date: date = None, precheck: int = None) -> dict:
+        json_data = {
+            "customerToken": customerToken.get_json_object(),
+            "date": date,
+            "precheck": precheck,
+            "amount": amount,
+            "accountType": accountType.get_json_object(),
             "bonusTransactionId": bonusTransactionId
         }
 
-        return self._api.post("bonuses/reverse", json_data = json_data).json()
+        json_response = self._api.post("bonuses/reverse", json_data = json_data).json()
+
+        return json_response
     
-    def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None, 
-                                showDeleted: bool = False) -> set:
+    # def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None, 
+    #                             showDeleted: bool = False) -> set:
                                 
-        json_response = self._operations_with_objects.getList("warehouse.nomenclature.dish", 
-                                                ownerContextId, ownerContextClassName, showDeleted).json()
+    #     json_response = self._operations_with_objects.getList("warehouse.nomenclature.dish", 
+    #                                             ownerContextId, ownerContextClassName, showDeleted).json()
 
-        dishes = set()
+    #     dishes = set()
 
-        for dish in json_response:
-            if 'DishCategory' in dish['className']:
-                dishes.add(DishCategory(**dish))
-            elif 'Dish' in dish['className']:
-                dishes.add(Dish(**dish))
+    #     for dish in json_response:
+    #         if 'DishCategory' in dish['className']:
+    #             dishes.add(DishCategory(**dish))
+    #         elif 'Dish' in dish['className']:
+    #             dishes.add(Dish(**dish))
 
-        return dishes
+    #     return json_response
 
 
-    def get_stores(self) -> set:
-        stores = set()
+    # def get_stores(self) -> set:
+    #     stores = set()
 
-        for store in self._get_system_object("warehouse.store").json():
-            if 'Store' in store['className']:
-                stores.add(Store(**store))
+    #     for store in self._get_system_object("warehouse.store").json():
+    #         if 'Store' in store['className']:
+    #             stores.add(Store(**store))
 
-        return stores
+    #     return stores
 
-    def get_table_orders(self) -> dict:
-        return self._get_system_object("front.tableorders").json()
+    # def get_table_orders(self) -> dict:
+    #     return self._get_system_object("front.tableorders").json()
 
-    def get_products(self) -> set:
-        products = set()
-        json_response = self._get_system_object("warehouse.nomenclature.singleproduct").json()
+    # def get_products(self) -> set:
+    #     products = set()
+    #     json_response = self._get_system_object("warehouse.nomenclature.singleproduct").json()
 
-        for product in json_response:
-            products.add(SingleProduct(**product))
+    #     for product in json_response:
+    #         products.add(SingleProduct(**product))
 
-        return products
+    #     return products
 
-    def get_employees(self) -> dict:
-        return self._operations_with_objects.getList("personnel.employee").json()
+    # def get_employees(self) -> dict:
+    #     return self._operations_with_objects.getList("personnel.employee").json()
 
-    def _get_system_object(self, url: str) -> requests.Response:
-        return self._api.get(f"api/list?moduleName={url}")
+    # def _get_system_object(self, url: str) -> requests.Response:
+    #     return self._api.get(f"api/list?moduleName={url}")
+
+
+    
+        
+        

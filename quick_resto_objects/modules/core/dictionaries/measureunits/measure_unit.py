@@ -17,7 +17,7 @@ StrToSystemUnit = {
 }
 
 
-def convert_str_to_system_Unit(value: str) -> SystemUnit:
+def convert_str_to_system_unit(value: str) -> SystemUnit:
     if value in StrToSystemUnit.keys():
         return StrToSystemUnit[value]
 
@@ -48,14 +48,15 @@ class MeasureUnit(QuickRestoObject):
     def code(self) -> str:
         return self._code
 
-    def __init__(self, name: str, fullName: str, isMainUnit: bool, parentRatio: float, code: str, systemUnit: str = "ITEM", **kwargs):
+    def __init__(self, name: str = None, fullName: str = None, isMainUnit: bool = None, parentRatio: float = None, code: str = None, 
+                    systemUnit: str = "ITEM", **kwargs):
         class_name = "ru.edgex.quickresto.modules.core.dictionaries.measureunits.MeasureUnit"
 
         super().__init__(class_name=class_name, **kwargs)
 
         self._name: str = name
         self._parent_ratio: float = parentRatio
-        self._system_unit = convert_str_to_system_Unit(systemUnit)
+        self._system_unit = convert_str_to_system_unit(systemUnit)
         self._full_name: str = fullName
         self._is_main_unit: bool = isMainUnit
         self._code: str = code

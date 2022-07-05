@@ -27,13 +27,13 @@ class CookingPlace(QuickRestoObject):
     def target_Device(self) -> TerminalDevice:
         return self._target_Device
 
-    def __init__(self, sendSignal: bool, title: str, store: dict, backupTargetDevice:dict = None, 
+    def __init__(self, sendSignal: bool=None, title: str=None, store: dict=None, backupTargetDevice:dict = None, 
                     doublicatingTargetDevice:dict = None, targetDevice:dict = None, **kwargs):
         class_name: str = "ru.edgex.quickresto.modules.warehouse.nomenclature.cooking_place.CookingPlace"
 
         super().__init__(class_name=class_name, **kwargs)
         self._send_signal: bool = sendSignal
-        self._store: Store = Store(**store)
+        if (store!=None):self._store: Store = Store(**store)
         self._title: str = title
 
         self._backup_target_device = backupTargetDevice

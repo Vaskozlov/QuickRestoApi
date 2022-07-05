@@ -42,15 +42,16 @@ class ExchangeInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, fromStore: dict, documentNumber: str, invoiceDate: str, store: dict, processed: bool, totalSum: float, totalSumWoNds: float, totalNds: float, comment: str, totalAmount: float, **kwargs):
+    def __init__(self, fromStore: dict=None, documentNumber: str=None, invoiceDate: str=None, store: dict=None, processed: bool=None, 
+                totalSum: float=None, totalSumWoNds: float=None, totalNds: float=None, comment: str=None, totalAmount: float=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.exchange.ExchangeInvoice"
 
         super().__init__(class_name=class_name, **kwargs)
 
-        self._from_store = Store(**fromStore)
+        if (fromStore!=None):self._from_store = Store(**fromStore)
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        self._store = Store(**store)
+        if (store!=store):self._store = Store(**store)
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

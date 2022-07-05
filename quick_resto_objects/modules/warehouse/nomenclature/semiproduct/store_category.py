@@ -27,15 +27,16 @@ class StoreCategory(QuickRestoObject):
     def item_title(self) -> str:
         return self._item_title
 
-    def __init__(self, version: int, serverRegisterTime: str, name: str, measureUnit: dict, storeItemTag: dict, color: str, displayOnTerminal: bool, itemTitle: str, **kwargs):
+    def __init__(self, version: int=None, serverRegisterTime: str=None, name: str=None, measureUnit: dict=None, storeItemTag: dict=None, 
+                color: str=None, displayOnTerminal: bool=None, itemTitle: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.nomenclature.StoreCategory"
         super().__init__(class_name=class_name, **kwargs)
 
         self._version: int = version
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
-        self._measure_unit: dict = MeasureUnit(**measureUnit)
-        self._store_item_tag: dict = StoreItemTag(**storeItemTag)
+        if (measureUnit!=None):self._measure_unit: dict = MeasureUnit(**measureUnit)
+        if (storeItemTag!=None):self._store_item_tag: dict = StoreItemTag(**storeItemTag)
         self._color: str = color
         self._display_on_terminal: bool = displayOnTerminal
         self._item_title: str = itemTitle

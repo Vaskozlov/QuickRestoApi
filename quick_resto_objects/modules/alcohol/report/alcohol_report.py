@@ -18,7 +18,7 @@ class AlcoholReport(QuickRestoObject):
     def alcohol_dictionary(self) -> AlcoholDictionary:
         return self._alcohol_dictionary
 
-    def __init__(self, deleted: bool, tapTime: int, count: int, alcoholDictionary: dict, **kwargs):
+    def __init__(self, deleted: bool = None, tapTime: int = None, count: int = None, alcoholDictionary: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.alcohol.report.AlcoholReport"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -26,4 +26,4 @@ class AlcoholReport(QuickRestoObject):
         self._deleted: bool = deleted
         self._tap_time: int = tapTime
         self._count: int = count
-        self._alcohol_dictionary: dict = AlcoholDictionary(**alcoholDictionary)
+        if (alcoholDictionary!=None): self._alcohol_dictionary: dict = AlcoholDictionary(**alcoholDictionary)

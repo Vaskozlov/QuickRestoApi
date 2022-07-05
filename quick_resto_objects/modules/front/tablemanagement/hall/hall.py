@@ -26,13 +26,13 @@ class Hall(QuickRestoObject):
     def title(self) -> str:
         return self._title
 
-    def __init__(self, version: int, deleted: bool, tables: list, width: int, height: int, title: str, **kwargs):
+    def __init__(self, version: int=None, deleted: bool=None, tables: list=None, width: int=None, height: int=None, title: str=None, **kwargs):
         class_name = ""
         super().__init__(class_name=class_name, **kwargs)
 
         self._version: int = version
         self._deleted: bool = deleted
-        self._tables: list = [Table(**value) for value in tables]
+        if (tables!=None):self._tables: list = [Table(**value) for value in tables]
         self._width: int = width
         self._height: int = height
         self._title: str = title

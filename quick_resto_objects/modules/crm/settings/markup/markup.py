@@ -1,3 +1,4 @@
+from operator import mod
 from quick_resto_objects.modules.core.dictionaries.storeitemtag.store_item_tag import StoreItemTag
 from quick_resto_objects.modules.crm.settings.fixed.fixed_discount import TypeDiscount, convert_str_to_type_discount
 from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
@@ -89,9 +90,9 @@ class Markup(QuickRestoObject):
     def days(self) -> list:
         return self._days
 
-    def __init__(self, name: str, deleted: bool, typeDiscount: str, value: float, operatorCancellable: bool, 
-                dateRange: dict, categories: list, dishes: list, tags: list, modifierGroups: list, salePlaces: list, 
-                days: list, **kwargs):
+    def __init__(self, name: str=None, deleted: bool=None, typeDiscount: str=None, value: float=None, operatorCancellable: bool=None, 
+                dateRange: dict=None, categories: list=None, dishes: list=None, tags: list=None, modifierGroups: list=None, salePlaces: list=None, 
+                days: list=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.settings.markup.Markup"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -101,10 +102,10 @@ class Markup(QuickRestoObject):
         self._type_discount: str = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
         self._operator_cancellable: bool = operatorCancellable
-        self._date_range: dict = TimeRange(**dateRange)
-        self._categories: list = [DishCategory(**category) for category in categories]
-        self._dishes: list = [Dish(**dish) for dish in dishes]
-        self._tags: list = [StoreItemTag(**tag) for tag in tags]
-        self._modifier_groups: list = [ModifierGroup(**group) for group in categories]
-        self._sale_places: list = [SalePlace(**place) for place in salePlaces]
-        self._days: list = [Day(**day) for day in days]
+        if (dateRange!=None):self._date_range: dict = TimeRange(**dateRange)
+        if (categories!=None):self._categories: list = [DishCategory(**category) for category in categories]
+        if (dishes!=None):self._dishes: list = [Dish(**dish) for dish in dishes]
+        if (tags!=None):self._tags: list = [StoreItemTag(**tag) for tag in tags]
+        if (modifierGroups!=None):self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        if (salePlaces!=None):self._sale_places: list = [SalePlace(**place) for place in salePlaces]
+        if (days!=None):self._days: list = [Day(**day) for day in days]

@@ -25,7 +25,8 @@ class NaturalPerson(QuickRestoObject):
     def last_name(self) -> str:
         return self._last_name
 
-    def __init__(self, shortName: str, egaisStatus: str, egaisActivityStatus: str, firstName: str, middleName: str, lastName: str, **kwargs):
+    def __init__(self, shortName: str=None, egaisStatus: str=None, egaisActivityStatus: str=None, firstName: str=None, 
+                middleName: str=None, lastName: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.providers.NaturalPerson"
 
         super().__init__(class_name=class_name, **kwargs)

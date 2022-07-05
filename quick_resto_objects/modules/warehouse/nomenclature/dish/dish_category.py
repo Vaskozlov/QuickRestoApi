@@ -59,8 +59,8 @@ class DishCategory(QuickRestoObject):
     def store_item_tag(self) -> StoreItemTag:
         return self._store_item_tag
 
-    def __init__(self, itemTitle: str, name: str, displayOnTerminal: bool, color: str, sellingType: str,
-                 measureUnit: dict, dishSales=None,storeItemTag=None, **kwargs):
+    def __init__(self, itemTitle: str=None, name: str=None, displayOnTerminal: bool=None, color: str=None, sellingType: str=None,
+                 measureUnit: dict=None, dishSales=None,storeItemTag=None, **kwargs):
         class_name: str = "ru.edgex.quickresto.modules.warehouse.nomenclature.dish.DishCategory"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -68,7 +68,7 @@ class DishCategory(QuickRestoObject):
         self._name: str = name
         self._color: str = color
         self._display_on_terminal: bool = displayOnTerminal
-        self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        if (measureUnit!=None):self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
         self._selling_type: SellingType = convert_str_to_selling_type(sellingType)
 
         if storeItemTag is None:

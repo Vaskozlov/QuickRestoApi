@@ -13,7 +13,7 @@ class ProviderGroup(QuickRestoObject):
     def egais_activity_status(self) -> str:
         return self._egais_activity_status
 
-    def __init__(self, shortName: str, egaisStatus: str, egaisActivityStatus: str, **kwargs):
+    def __init__(self, shortName: str=None, egaisStatus: str=None, egaisActivityStatus: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.providers.ProviderGroup"
 
         super().__init__(class_name=class_name, **kwargs)

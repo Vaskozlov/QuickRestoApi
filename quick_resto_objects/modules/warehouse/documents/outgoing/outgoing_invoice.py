@@ -83,8 +83,8 @@ class OutgoingInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, documentNumber: str, invoiceDate: str, customerType: str, store: dict, processed: bool, totalSum: float,
-                totalSumWoNds: float, totalNds: float, costPriceSum: float, reason: str, comment: str, totalAmount: float, 
+    def __init__(self, documentNumber: str=None, invoiceDate: str=None, customerType: str=None, store: dict=None, processed: bool=None, totalSum: float=None,
+                totalSumWoNds: float=None, totalNds: float=None, costPriceSum: float=None, reason: str=None, comment: str=None, totalAmount: float=None, 
                 subject: dict = None, guest:dict = None, operator:dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.outgoing.OutgoingInvoice"
 
@@ -92,8 +92,8 @@ class OutgoingInvoice(QuickRestoObject):
 
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        self._customer_type: CustomerType = convert_str_to_customer_type(customerType)
-        self._store = Store(**store)
+        if (customerType!=None):self._customer_type: CustomerType = convert_str_to_customer_type(customerType)
+        if (store!=None):self._store = Store(**store)
         self._processed: bool = processed
         self._subject: dict = subject
         self._operator:dict = operator

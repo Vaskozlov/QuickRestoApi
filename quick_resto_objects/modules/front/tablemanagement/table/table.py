@@ -73,8 +73,8 @@ class Table(QuickRestoObject):
     def title(self) -> str:
         return self._title
 
-    def __init__(self, angle: int, deleted: bool, width: int, height: int, isBusy: bool, itemTitle: str,
-                 minCapacity: int, maxCapacity: int, reservable: bool, shape: str, title: str, x: int, y: int,
+    def __init__(self, angle: int=None, deleted: bool=None, width: int=None, height: int=None, isBusy: bool=None, itemTitle: str=None,
+                 minCapacity: int=None, maxCapacity: int=None, reservable: bool=None, shape: str=None, title: str=None, x: int=None, y: int=None,
                  **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.tablemanagement.Table"
 

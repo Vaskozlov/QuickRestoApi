@@ -9,7 +9,7 @@ class StoreItemTag(QuickRestoObject):
     def name(self) -> str:
         return self._name
 
-    def __init__(self, name: str, deleted: bool, **kwargs):
+    def __init__(self, name: str = None, deleted: bool = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.core.dictionaries.storeitemtag.StoreItemTag"
 
         super().__init__(class_name = class_name, **kwargs)

@@ -22,7 +22,7 @@ class Group(QuickRestoObject):
     def customer_operation_limit(self) -> int:
         return self._customer_operation_limit
 
-    def __init__(self, groupId: int, deleted: bool, name: str, discountValue: float, customerOperationLimit: int,
+    def __init__(self, groupId: int=None, deleted: bool=None, name: str=None, discountValue: float=None, customerOperationLimit: int=None,
                  **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.customer.group.Group"
 

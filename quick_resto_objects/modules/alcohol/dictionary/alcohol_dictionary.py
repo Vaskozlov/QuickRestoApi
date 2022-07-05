@@ -26,8 +26,8 @@ class AlcoholDictionary(QuickRestoObject):
     def store_product(self) -> Dish:
         return self._store_product
 
-    def __init__(self, deleted: bool, egaisName: str, egaisSize: int, egaisTypeCode: str, showOnTerminal: bool, 
-                storeProduct: dict, **kwargs):
+    def __init__(self, deleted: bool = None, egaisName: str = None, egaisSize: int = None, egaisTypeCode: str = None, 
+                showOnTerminal: bool = None, storeProduct: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.alcohol.dictionary.AlcoholDictionary"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -37,4 +37,4 @@ class AlcoholDictionary(QuickRestoObject):
         self._egais_size: int = egaisSize
         self._egais_type_code: str = egaisTypeCode
         self._show_on_terminal: bool = showOnTerminal
-        self._store_product: dict = Dish(**storeProduct)
+        if (storeProduct != None): self._store_product: dict = Dish(**storeProduct)

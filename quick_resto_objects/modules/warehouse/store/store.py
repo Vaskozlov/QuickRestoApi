@@ -18,11 +18,11 @@ class Store(QuickRestoObject):
     def lite_business(self) -> Employee:
         return self._lite_business
 
-    def __init__(self, storeCode: str, title: str, liteBusiness: dict, description: str = "", **kwargs):
+    def __init__(self, storeCode: str=None, title: str=None, liteBusiness: dict=None, description: str = "", **kwargs):
         class_name: str = "ru.edgex.quickresto.modules.warehouse.store.Store"
 
         super().__init__(class_name=class_name, **kwargs)
         self._title: str = title
         self._description: str = description
         self._store_code: int = int(storeCode)
-        self._lite_business: list = [Employee(**employee) for employee in liteBusiness]
+        self._lite_business: Employee = Employee(**liteBusiness)

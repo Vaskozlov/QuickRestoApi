@@ -81,20 +81,20 @@ class Dish(QuickRestoObject):
     def store_item_tag(self) -> StoreItemTag:
         return self._store_item_tag
 
-    def __init__(self, article: str, basePriceInList: float, dishSales: list, displayOnTerminal: bool,
-                 excludeDiscount: bool, excludeMarkup: bool, measureUnit: dict, minimalPrice: float, name: str,
-                 pack: float, ratio: float, recipe: str, sellingType: str, storeQuantityKg: float, parentId:int = None, 
+    def __init__(self, article: str=None, basePriceInList: float=None, dishSales: list=None, displayOnTerminal: bool=None,
+                 excludeDiscount: bool=None, excludeMarkup: bool=None, measureUnit: dict=None, minimalPrice: float=None, name: str=None,
+                 pack: float= None, ratio: float= None, recipe: str= None, sellingType: str= None, storeQuantityKg: float= None, parentId:int = None, 
                  parentItem: dict = None, price: float = 0.0, itemTitle: str = "", storeItemTag=None, **kwargs):
         class_name: str = "ru.edgex.quickresto.modules.warehouse.nomenclature.Dish"
 
         super().__init__(class_name=class_name, **kwargs)
-        self._article: int = int(article)
+        if (article != None): self._article: int = int(article)
         self._base_price_in_list: float = basePriceInList
-        self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
+        if (dishSales!=None):self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
         self._display_on_terminal: bool = displayOnTerminal
         self._exclude_discount: bool = excludeDiscount
         self._exclude_markup: bool = excludeMarkup
-        self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        if (measureUnit!=None):self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
         self._minimal_price: float = minimalPrice
         self._name: str = name
         self._pack: float = pack
@@ -111,4 +111,4 @@ class Dish(QuickRestoObject):
             self._store_item_tag = StoreItemTag(**storeItemTag)
 
         self._parent_id = parentId
-        self._parent_item = DishCategory(**parentItem)
+        if (parentItem != None): self._parent_item = DishCategory(**parentItem)

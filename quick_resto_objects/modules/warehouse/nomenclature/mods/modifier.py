@@ -85,10 +85,10 @@ class Modifier(QuickRestoObject):
     def store_item_tag(self) -> StoreItemTag:
         return self._store_item_tag
 
-    def __init__(self, name: str, measureUnit: dict, color:str, displayOnTerminal:bool,minValue:int,maxValue:int,withDish:bool, 
-                    modifierSales:list, excludeDiscount:bool, excludeMarkup:bool, article:int, itemTitle:str,
-                    titleInPrice:str, storeQuantityKg:float, defaultValue:int,basePriceInList:float,pack:float,recipe:str,
-                    price:float,minimalPrice:float,deleted:bool,storeItemTag=None,**kwargs):
+    def __init__(self, name: str=None, measureUnit: dict=None, color:str=None, displayOnTerminal:bool=None,minValue:int=None,maxValue:int=None,withDish:bool=None, 
+                    modifierSales:list=None, excludeDiscount:bool=None, excludeMarkup:bool=None, article:int=None, itemTitle:str=None,
+                    titleInPrice:str=None, storeQuantityKg:float=None, defaultValue:int=None,basePriceInList:float=None,pack:float=None,recipe:str=None,
+                    price:float=None,minimalPrice:float=None,deleted:bool=None,storeItemTag=None,**kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.nomenclature.mods.ModifierGroup"
 
         super().__init__(class_name=class_name,**kwargs)
@@ -99,9 +99,9 @@ class Modifier(QuickRestoObject):
         self._color = color
         self._display_on_terminal = displayOnTerminal
         self._min_value = minValue
-        self._max_value = minValue
+        self._max_value = maxValue
         self._with_dish = withDish
-        self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
+        if(modifierSales!=None):self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
         self._item_title = itemTitle
         self._article = article
         self._titleInPrice = titleInPrice

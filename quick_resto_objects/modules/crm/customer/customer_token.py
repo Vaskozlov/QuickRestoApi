@@ -62,7 +62,7 @@ class CustomerToken(QuickRestoObject):
     def key(self) -> str:
         return self._key
 
-    def __init__(self, entry: str, key: str, type: str, **kwargs):
+    def __init__(self, entry: str=None, key: str=None, type: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.customer.CrmToken"
 
         super().__init__(class_name=class_name, **kwargs)

@@ -29,7 +29,8 @@ class DiscardReason(QuickRestoObject):
     def description(self) -> str:
         return self._description
 
-    def __init__(self, systemOrderDiscardReason: str, version: int, refId: str, withdrawFromStore: bool, useComment: bool, saveToTerminals: bool, description: str, **kwargs):
+    def __init__(self, systemOrderDiscardReason: str=None, version: int=None, refId: str=None, withdrawFromStore: bool=None, 
+                useComment: bool=None, saveToTerminals: bool=None, description: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.discard"
 
         super().__init__(class_name=class_name, **kwargs)

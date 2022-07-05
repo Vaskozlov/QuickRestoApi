@@ -59,8 +59,8 @@ class DiscardInvoice(QuickRestoObject):
     def guest(self) -> dict:
         return self._guest
 
-    def __init__(self, documentNumber: str, invoiceDate: str, customerType: str, store: dict, processed: bool, totalSum: float, 
-                totalSumWoNds: float, totalNds: float, comment: str, totalAmount: float, discardReason: dict = None, 
+    def __init__(self, documentNumber: str=None, invoiceDate: str=None, customerType: str=None, store: dict=None, processed: bool=None, totalSum: float=None, 
+                totalSumWoNds: float=None, totalNds: float=None, comment: str=None, totalAmount: float=None, discardReason: dict = None, 
                 subject: dict = None, operator:dict = None, guest:dict = None,**kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.discard.DiscardInvoice"
 
@@ -69,7 +69,7 @@ class DiscardInvoice(QuickRestoObject):
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
         self._customer_type = convert_str_to_customer_type(customerType)
-        self._store = Store(**store)
+        if (store!=None):self._store = Store(**store)
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

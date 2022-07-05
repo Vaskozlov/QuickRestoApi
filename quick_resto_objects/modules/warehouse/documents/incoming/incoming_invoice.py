@@ -46,15 +46,15 @@ class IncomingInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, documentNumber: str, invoiceDate: str, provider: dict, store: dict, processed: bool, totalSum: float, 
-                    totalSumWoNds: float, totalNds: float, paid: bool, totalAmount: float, **kwargs):
+    def __init__(self, documentNumber: str=None, invoiceDate: str=None, provider: dict=None, store: dict=None, processed: bool=None, totalSum: float=None, 
+                    totalSumWoNds: float=None, totalNds: float=None, paid: bool=None, totalAmount: float=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.incoming.IncomingInvoice"
 
         super().__init__(class_name=class_name, **kwargs)
 
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        self._store = Store(**store)
+        if (store!=None):self._store = Store(**store)
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds
@@ -62,7 +62,8 @@ class IncomingInvoice(QuickRestoObject):
         self._paid: bool = paid
         self._total_amount: float = totalAmount
 
-        if (provider is Businessman): self._provider = Businessman(**provider)
-        elif (provider is NaturalPerson): self._provider = NaturalPerson(**provider)
-        elif (provider is Organization): self._provider = Organization
-        elif (provider is ProviderGroup): self._provider = ProviderGroup(**provider)
+        if (provider!=None):
+            if (provider is Businessman): self._provider = Businessman(**provider)
+            elif (provider is NaturalPerson): self._provider = NaturalPerson(**provider)
+            elif (provider is Organization): self._provider = Organization
+            elif (provider is ProviderGroup): self._provider = ProviderGroup(**provider)

@@ -63,22 +63,24 @@ class BonusProgram(QuickRestoObject):
     def tags(self) -> list:
         return self._tags
 
-    def __init__(self, version: int, name: str, deleted: bool, days: list, groups: list, startDate: str, endDate: str, accValue: float, accountType: dict, doNotAccumulateWhileRedeeming: bool, greetingBonus: float, birthdayBonus: float, categories: list, dishes: list, tags: list, **kwargs):
+    def __init__(self, name: str=None, deleted: bool=None, days: list=None, groups: list=None, startDate: str=None, endDate: str=None, 
+                accValue: float=None, accountType: dict=None, doNotAccumulateWhileRedeeming: bool=None, greetingBonus: float=None, 
+                birthdayBonus: float=None, categories: list=None, dishes: list=None, tags: list=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.settings.bonus.BonusProgram"
         
         super().__init__(class_name=class_name, **kwargs)
 
         self._name: str = name
         self._deleted: bool = deleted
-        self._days: list = [Day(**day) for day in days]
-        self._groups: list = [Group(**group) for group in days]
+        if (days!=None):self._days: list = [Day(**day) for day in days]
+        if (groups!=None):self._groups: list = [Group(**group) for group in groups]
         self._start_date: str = startDate
         self._end_date: str = endDate
         self._acc_value: float = accValue
-        self._account_type: dict = AccountType(**accountType)
+        if (accountType!=None):self._account_type: dict = AccountType(**accountType)
         self._do_not_accumulate_while_redeeming: bool = doNotAccumulateWhileRedeeming
         self._greeting_bonus: float = greetingBonus
         self._birthday_bonus: float = birthdayBonus
-        self._categories: list = [DishCategory(**category) for category in categories]
-        self._dishes: list = [Dish(**dish) for dish in dishes]
-        self._tags: list = [StoreItemTag(**tag) for tag in tags]
+        if (categories!=None):self._categories: list = [DishCategory(**category) for category in categories]
+        if (dishes!=None):self._dishes: list = [Dish(**dish) for dish in dishes]
+        if (tags!=None):self._tags: list = [StoreItemTag(**tag) for tag in tags]

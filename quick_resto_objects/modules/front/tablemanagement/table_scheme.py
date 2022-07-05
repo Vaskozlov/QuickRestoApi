@@ -43,8 +43,8 @@ class TableScheme(QuickRestoObject):
     def halls(self) -> list:
         return self._halls
 
-    def __init__(self, currentLoad: int, deleted: bool, width: int, height: int, itemTitle: str, maxCapacity: int,
-                 name: str, tables: list, halls:list, reservations: list, **kwargs):
+    def __init__(self, currentLoad: int=None, deleted: bool=None, width: int=None, height: int=None, itemTitle: str=None, maxCapacity: int=None,
+                 name: str=None, tables: list=None, reservations: list=None,halls:list=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.tablemanagement.TableScheme"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -57,4 +57,4 @@ class TableScheme(QuickRestoObject):
         self._name: str = name
         self._reservations: list = reservations
         self._tables: list = [Table(**table) for table in tables]
-        self._halls: list = [Hall(**value) for value in halls]
+        if (halls != None): self._halls: list = [Hall(**value) for value in halls]

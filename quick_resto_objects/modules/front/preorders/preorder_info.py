@@ -51,7 +51,9 @@ class PreorderInfo(QuickRestoObject):
     def table_order_doc_id(self) -> str:
         return self._table_order_doc_id
 
-    def __init__(self, cancellationReasonComment: str, createDate: date, discountPercent: int, frontTotalAbsoluteCharge: int, frontTotalAbsoluteDiscount: int, frontTotalDiscount: int, guestCount: int, printTime: int, sum: int, sumWithDiscount: int, table: dict, tableOrderDocId: str, **kwargs):
+    def __init__(self, cancellationReasonComment: str=None, createDate: date=None, discountPercent: int=None, frontTotalAbsoluteCharge: int=None, 
+                frontTotalAbsoluteDiscount: int=None, frontTotalDiscount: int=None, guestCount: int=None, printTime: int=None, sum: int=None, 
+                sumWithDiscount: int=None, table: dict=None, tableOrderDocId: str=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.preorders.PreorderInfo"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -66,5 +68,5 @@ class PreorderInfo(QuickRestoObject):
         self._print_time: int = printTime
         self._sum: int = sum
         self._sum_with_discount: int = sumWithDiscount
-        self._table = Table(**table)
+        if (table!=None):self._table = Table(**table)
         self._table_order_doc_id: str = tableOrderDocId

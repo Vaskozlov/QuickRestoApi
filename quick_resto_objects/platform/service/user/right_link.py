@@ -6,9 +6,9 @@ class RightLink(QuickRestoObject):
     def right(self) -> Right:
         return self._right
 
-    def __init__(self, right: dict, **kwargs):
+    def __init__(self, right: dict=None, **kwargs):
         class_name = "ru.edgex.platform.service.user.RightLink"
 
         super().__init__(class_name=class_name, **kwargs)
 
-        self._right: dict = Right(**right)
+        if (right!=None):self._right: dict = Right(**right)

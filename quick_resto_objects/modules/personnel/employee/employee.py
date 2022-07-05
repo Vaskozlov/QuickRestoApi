@@ -29,7 +29,8 @@ class Employee(QuickRestoObject):
     def full_name(self) -> str:
         return self._full_name
 
-    def __init__(self, systemEmployee: str, user: dict, firstName: str, lastName: str, blocked: bool, shortName: str, fullName: str, **kwargs):
+    def __init__(self, systemEmployee: str=None, user: dict=None, firstName: str=None, lastName: str=None, blocked: bool=None, 
+                shortName: str=None, fullName: str=None, **kwargs):
         class_name = ""
         super().__init__(class_name=class_name, **kwargs)
 

@@ -79,11 +79,11 @@ class PaymentType(QuickRestoObject):
     def concrete_partners_web(self) -> list:
         return self._concrete_partners_web
 
-    def __init__(self, name: str, type: str, operationType: str, partialAllowed: bool, seq: int, requireAdminConfirmation: bool, 
-                requireCustomerConfirmation: bool, customerType: str, paymentMechanismWeb: str, allowedOrganizationsWeb: list, 
-                allowedSalePlacesWeb: list, employeeRolesWeb: list, concreteEmployeesWeb: list, allowedUserRolesWeb: list, 
-                allowedConcreteUsersWeb: list, guestGroupsWeb: list, concreteGuestsWeb: list, partnerGroupsWeb: list, 
-                concretePartnersWeb: list, **kwargs):
+    def __init__(self, name: str = None, type: str = None, operationType: str = None, partialAllowed: bool = None, seq: int = None, requireAdminConfirmation: bool = None, 
+                requireCustomerConfirmation: bool = None, customerType: str = None, paymentMechanismWeb: str = None, allowedOrganizationsWeb: list = None, 
+                allowedSalePlacesWeb: list = None, employeeRolesWeb: list = None, concreteEmployeesWeb: list = None, allowedUserRolesWeb: list = None, 
+                allowedConcreteUsersWeb: list = None, guestGroupsWeb: list = None, concreteGuestsWeb: list = None, partnerGroupsWeb: list = None, 
+                concretePartnersWeb: list = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.core.dictionaries.paymenttypes.PaymentType"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -98,10 +98,10 @@ class PaymentType(QuickRestoObject):
         self._customer_type: str = customerType
         self._payment_mechanism_web: str = paymentMechanismWeb
         self._allowed_organizations_web: list = allowedOrganizationsWeb
-        self._allowed_sale_places_web: list = [SalePlace(**place) for place in allowedSalePlacesWeb]
+        if (allowedSalePlacesWeb!=None):self._allowed_sale_places_web: list = [SalePlace(**place) for place in allowedSalePlacesWeb]
         self._employee_roles_web: list = employeeRolesWeb
         self._concrete_employees_web: list = concreteEmployeesWeb
-        self._allowed_user_roles_web: list = [Role(**value) for value in allowedUserRolesWeb]
+        if (allowedUserRolesWeb!=None):self._allowed_user_roles_web: list = [Role(**value) for value in allowedUserRolesWeb]
         self._allowed_concrete_users_web: list = allowedConcreteUsersWeb
         self._guest_groups_web: list = guestGroupsWeb
         self._concrete_guests_web: list = concreteGuestsWeb

@@ -63,8 +63,8 @@ class FixedDiscount(QuickRestoObject):
     def index(self) -> int:
         return self._index
 
-    def __init__(self, name: str, deleted: bool, typeDiscount: str, value: float, categories: set, dishes: set, 
-                    tags: set, modifierGroups: list, salePlaces: set, index: int, **kwargs):
+    def __init__(self, name: str=None, deleted: bool=None, typeDiscount: str=None, value: float=None, categories: set=None, dishes: set=None, 
+                    tags: set=None, modifierGroups: list=None, salePlaces: set=None, index: int=None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.settings.fixed.FixedDiscount"
         
         super().__init__(class_name=class_name, **kwargs)
@@ -73,9 +73,9 @@ class FixedDiscount(QuickRestoObject):
         self._deleted: bool = deleted
         self._type_discount: str = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
-        self._categories: set = [DishCategory(**category) for category in categories]
-        self._dishes: set = [Dish(**dish) for dish in dishes]
-        self._tags: set = tags
-        self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+        if (categories!=None):self._categories: set = [DishCategory(**category) for category in categories]
+        if (dishes!=None):self._dishes: set = [Dish(**dish) for dish in dishes]
+        if (tags!=None):self._tags: set = tags
+        if (modifierGroups!=None):self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        if (salePlaces!=None):self._sale_places: set = [SalePlace(**place) for place in salePlaces]
         self._index: int = index
