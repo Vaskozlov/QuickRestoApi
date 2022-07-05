@@ -1,6 +1,7 @@
 from quick_resto_objects.modules.front.terminals.device_command import DeviceCommand
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class KkmTerminal(QuickRestoObject):
     @property
     def device_id(self) -> str:
@@ -38,10 +39,11 @@ class KkmTerminal(QuickRestoObject):
     def command(self) -> DeviceCommand:
         return self._command
 
-    def __init__(self, deviceId: str=None, manufacturer: str=None, model: str=None, connected: bool=None, name: str=None, deleted: bool=None, 
-                activateOnCurrentTerminal: bool=None, state: str=None, command: dict=None, **kwargs):
+    def __init__(self, deviceId: str = None, manufacturer: str = None, model: str = None, connected: bool = None,
+                 name: str = None, deleted: bool = None,
+                 activateOnCurrentTerminal: bool = None, state: str = None, command: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.terminals.kkm.KkmTerminal"
-        
+
         super().__init__(class_name=class_name, **kwargs)
 
         self._device_id: str = deviceId
@@ -52,4 +54,4 @@ class KkmTerminal(QuickRestoObject):
         self._deleted: bool = deleted
         self._activate_on_current_terminal: bool = activateOnCurrentTerminal
         self._state: str = state
-        if (command!=None):self._command = DeviceCommand(**command)
+        if (command != None): self._command = DeviceCommand(**command)

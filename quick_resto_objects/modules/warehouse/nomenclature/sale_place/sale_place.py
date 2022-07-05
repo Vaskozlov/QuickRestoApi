@@ -73,18 +73,22 @@ class SalePlace(QuickRestoObject):
     def report_target_device(self) -> TerminalDevice:
         return self._report_target_device
 
-    def __init__(self, automaticEncashment: bool= None, canHoldTableOrders: bool= None, defaultCookingPlace: dict= None,
-                 maxTableOrderNumberEnable: bool=None, openCashBoxOnGuestTickets: bool=None, openCashBoxOnPrechecks: bool=None,
-                 openCashBoxOnReports: bool=None, printGuestTicket: bool=None, printKitchenTicket: bool=None, services: list=None,
-                 tableScheme: dict=None, title: str=None, backupPrechecksTargetDevice: dict = None, 
-                 kkmOrganization1:dict = None, kkmOrganization2: dict = None, 
+    def __init__(self, automaticEncashment: bool = None, canHoldTableOrders: bool = None,
+                 defaultCookingPlace: dict = None,
+                 maxTableOrderNumberEnable: bool = None, openCashBoxOnGuestTickets: bool = None,
+                 openCashBoxOnPrechecks: bool = None,
+                 openCashBoxOnReports: bool = None, printGuestTicket: bool = None, printKitchenTicket: bool = None,
+                 services: list = None,
+                 tableScheme: dict = None, title: str = None, backupPrechecksTargetDevice: dict = None,
+                 kkmOrganization1: dict = None, kkmOrganization2: dict = None,
                  prechecksTargetDevice: dict = None, reportTargetDevice: dict = None, **kwargs):
         class_name: str = "modules.warehouse.nomenclature.sale_place.SalePlace"
 
         super().__init__(class_name=class_name, **kwargs)
         self._automatic_encashment: bool = automaticEncashment
         self._can_hold_table_orders: bool = canHoldTableOrders
-        if (defaultCookingPlace!=None):self._default_cooking_place: CookingPlace = CookingPlace(**defaultCookingPlace)
+        if (defaultCookingPlace != None): self._default_cooking_place: CookingPlace = CookingPlace(
+            **defaultCookingPlace)
         self._max_table_order_number_enable: bool = maxTableOrderNumberEnable
         self._open_cash_box_on_guest_tickets: bool = openCashBoxOnGuestTickets
         self._open_cash_box_on_prechecks: bool = openCashBoxOnPrechecks
@@ -93,10 +97,11 @@ class SalePlace(QuickRestoObject):
         self._print_kitchen_ticket: bool = printKitchenTicket
         self._services: list = services
         self._title: str = title
-        if (tableScheme!=None):self._table: TableScheme = TableScheme(**tableScheme)
+        if (tableScheme != None): self._table: TableScheme = TableScheme(**tableScheme)
 
-        if (backupPrechecksTargetDevice != None):self._backup_prechecks_target_device = TerminalDevice(**backupPrechecksTargetDevice)
-        if (kkmOrganization1 != None):self._kkm_organization1 = TerminalDevice(**kkmOrganization1)
-        if (kkmOrganization2 != None):self._kkm_organization2 = TerminalDevice(**kkmOrganization2)
-        if (prechecksTargetDevice != None):self._prechecks_target_device = TerminalDevice(**prechecksTargetDevice)
-        if (reportTargetDevice != None):self._report_target_device = TerminalDevice(**reportTargetDevice)
+        if (backupPrechecksTargetDevice != None): self._backup_prechecks_target_device = TerminalDevice(
+            **backupPrechecksTargetDevice)
+        if (kkmOrganization1 != None): self._kkm_organization1 = TerminalDevice(**kkmOrganization1)
+        if (kkmOrganization2 != None): self._kkm_organization2 = TerminalDevice(**kkmOrganization2)
+        if (prechecksTargetDevice != None): self._prechecks_target_device = TerminalDevice(**prechecksTargetDevice)
+        if (reportTargetDevice != None): self._report_target_device = TerminalDevice(**reportTargetDevice)

@@ -1,6 +1,7 @@
 from quick_resto_objects.modules.warehouse.store.store import Store
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class CookingInvoice(QuickRestoObject):
     @property
     def from_store(self) -> Store:
@@ -42,16 +43,18 @@ class CookingInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, fromStore: dict=None, documentNumber: str=None, invoiceDate: str=None, store: dict=None, processed: bool=None, totalSum: float=None, 
-                totalSumWoNds: float=None, totalNds: float=None, comment: str=None, totalAmount: float=None, **kwargs):
+    def __init__(self, fromStore: dict = None, documentNumber: str = None, invoiceDate: str = None, store: dict = None,
+                 processed: bool = None, totalSum: float = None,
+                 totalSumWoNds: float = None, totalNds: float = None, comment: str = None, totalAmount: float = None,
+                 **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.cooking.CookingInvoice"
-        
+
         super().__init__(class_name=class_name, **kwargs)
 
-        if (fromStore!=None):self._from_store = Store(**fromStore)
+        if (fromStore != None): self._from_store = Store(**fromStore)
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        if (store!=None):self._store = Store(**store)
+        if (store != None): self._store = Store(**store)
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

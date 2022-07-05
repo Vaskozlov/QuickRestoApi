@@ -1,5 +1,6 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Employee(QuickRestoObject):
     @property
     def system_employee(self) -> str:
@@ -29,8 +30,9 @@ class Employee(QuickRestoObject):
     def full_name(self) -> str:
         return self._full_name
 
-    def __init__(self, systemEmployee: str=None, user: dict=None, firstName: str=None, lastName: str=None, blocked: bool=None, 
-                shortName: str=None, fullName: str=None, **kwargs):
+    def __init__(self, systemEmployee: str = None, user: dict = None, firstName: str = None, lastName: str = None,
+                 blocked: bool = None,
+                 shortName: str = None, fullName: str = None, **kwargs):
         class_name = ""
         super().__init__(class_name=class_name, **kwargs)
 

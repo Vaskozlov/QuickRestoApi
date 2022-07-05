@@ -1,5 +1,6 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class RaspberryTerminal(QuickRestoObject):
     @property
     def code1_c(self) -> str:
@@ -57,7 +58,9 @@ class RaspberryTerminal(QuickRestoObject):
     def online(self) -> bool:
         return self._online
 
-    def __init__(self, code1C: str, deviceId: str, macAddress: str, manufacturer: str, model: str, connected: bool, deleted: bool, name: str, serialNumber: str, hardwareVersion: str, lastSyncTime: str, softwareVersion: str, product: str, online: bool, **kwargs):
+    def __init__(self, code1C: str, deviceId: str, macAddress: str, manufacturer: str, model: str, connected: bool,
+                 deleted: bool, name: str, serialNumber: str, hardwareVersion: str, lastSyncTime: str,
+                 softwareVersion: str, product: str, online: bool, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.terminals.raspberry.RaspberryTerminal"
 
         super().__init__(class_name=class_name, **kwargs)

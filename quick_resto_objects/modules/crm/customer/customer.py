@@ -1,9 +1,11 @@
 from enum import Enum
+
 from quick_resto_objects.modules.crm.accounting.account.contact_method import ContactMethod
 from quick_resto_objects.modules.crm.accounting.account.customer_account import CustomerAccount
 from quick_resto_objects.modules.crm.customer.customer_token import CustomerToken
 from quick_resto_objects.modules.crm.customer.group import Group
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class CrmCustomerType(Enum):
     NONE = "NONE"
@@ -93,15 +95,18 @@ class CrmCustomer(QuickRestoObject):
     def customer_type(self) -> CrmCustomerType:
         return self._customer_type
 
-    def __init__(self, accounts: list=None, addresses: list=None, contactMethods: list=None, customerGuid: str=None,
-                 firstName: str=None, lastName: str=None, tokens: list=None, type: str=None, customerGroup: dict=None, comment: str = "",
+    def __init__(self, accounts: list = None, addresses: list = None, contactMethods: list = None,
+                 customerGuid: str = None,
+                 firstName: str = None, lastName: str = None, tokens: list = None, type: str = None,
+                 customerGroup: dict = None, comment: str = "",
                  middleName: str = "", sex: str = "", dateOfBirth: str = "", **kwargs):
         class_name: str = 'ru.edgex.quickresto.modules.crm.customer.CrmCustomer'
 
         super().__init__(class_name=class_name, **kwargs)
-        if (accounts!=None):self._accounts: list = [CustomerAccount(**account) for account in accounts]
+        if (accounts != None): self._accounts: list = [CustomerAccount(**account) for account in accounts]
         self._addresses: list = addresses
-        if (contactMethods!=None):self._contact_methods: list = [ContactMethod(**contact_method) for contact_method in contactMethods]
+        if (contactMethods != None): self._contact_methods: list = [ContactMethod(**contact_method) for contact_method
+                                                                    in contactMethods]
         self._customer_guid: str = customerGuid
         self._first_name: str = firstName
         self._middle_name: str = middleName
@@ -109,6 +114,6 @@ class CrmCustomer(QuickRestoObject):
         self._sex: CrmCustomerSex = convert_str_to_crm_customer_sex(sex)
         self._comment: str = comment
         self._date_of_birth: str = dateOfBirth
-        if (tokens!=None):self._tokens: list = [CustomerToken(**token) for token in tokens]
+        if (tokens != None): self._tokens: list = [CustomerToken(**token) for token in tokens]
         self._customer_type: CrmCustomerType = convert_str_to_crm_customer_type(type)
-        if (customerGroup!=None):self._group: Group = Group(**customerGroup)
+        if (customerGroup != None): self._group: Group = Group(**customerGroup)

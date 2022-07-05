@@ -1,4 +1,5 @@
 from enum import Enum
+
 from quick_resto_objects.modules.front.terminals.terminal_device import TerminalDevice
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
@@ -7,6 +8,7 @@ class ShiftStatus(Enum):
     OPENED = "OPENED"
     CLOSE = "CLOSE"
     NONE = "NONE"
+
 
 StrToShiftStatus = {
     ShiftStatus.OPENED.value: ShiftStatus.OPENED,
@@ -19,6 +21,7 @@ def convert_str_to_system_Unit(value: str) -> ShiftStatus:
         return StrToShiftStatus[value]
 
     return ShiftStatus.NONE
+
 
 class Shift(QuickRestoObject):
     @property
@@ -165,14 +168,22 @@ class Shift(QuickRestoObject):
     def z_report_document_number(self) -> int:
         return self._z_report_document_number
 
-    def __init__(self, cashOutCheksCount: int=None, cashInCheksCount: int=None, closeCashInRegister: int=None, closerId: int=None, closed: int=None, 
-                code1C: str=None, incomplete: bool=None, kkmTerminal: dict=None, nonFiscalTotalBonuses: int=None, nonFiscalTotalCard: int=None, 
-                nonFiscalTotalCash: int=None, nonFiscalTotalReturnBonuses: int=None, nonFiscalTotalReturnCard: int=None, 
-                nonFiscalTotalReturnCash: int=None, openCashInRegister: int=None, opened: int=None, openerId: str=None, ordersCount: int=None, 
-                returnOrdersCount: int=None, shiftNumber: int=None, status: str=None, totalCard: int=None, totalCash: int=None, totalCashIn: int=None, 
-                totalCashInRegister: int=None, totalCashOut: int=None, totalReturnBonuses: int=None, totalReturnCard: int=None, totalReturnCash: int=None, 
-                writeOffTotalBonuses: int=None, writeOffTotalCard: int=None, writeOffTotalCash: int=None, writeOffTotalReturnBonuses: int=None, 
-                writeOffTotalReturnCard: int=None, writeOffTotalReturnCash: int=None, zReportDocumentNumber: int=None, **kwargs):
+    def __init__(self, cashOutCheksCount: int = None, cashInCheksCount: int = None, closeCashInRegister: int = None,
+                 closerId: int = None, closed: int = None,
+                 code1C: str = None, incomplete: bool = None, kkmTerminal: dict = None,
+                 nonFiscalTotalBonuses: int = None, nonFiscalTotalCard: int = None,
+                 nonFiscalTotalCash: int = None, nonFiscalTotalReturnBonuses: int = None,
+                 nonFiscalTotalReturnCard: int = None,
+                 nonFiscalTotalReturnCash: int = None, openCashInRegister: int = None, opened: int = None,
+                 openerId: str = None, ordersCount: int = None,
+                 returnOrdersCount: int = None, shiftNumber: int = None, status: str = None, totalCard: int = None,
+                 totalCash: int = None, totalCashIn: int = None,
+                 totalCashInRegister: int = None, totalCashOut: int = None, totalReturnBonuses: int = None,
+                 totalReturnCard: int = None, totalReturnCash: int = None,
+                 writeOffTotalBonuses: int = None, writeOffTotalCard: int = None, writeOffTotalCash: int = None,
+                 writeOffTotalReturnBonuses: int = None,
+                 writeOffTotalReturnCard: int = None, writeOffTotalReturnCash: int = None,
+                 zReportDocumentNumber: int = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.zreport.Shift"
 
         super().__init__(class_name=class_name, **kwargs)

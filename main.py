@@ -1,4 +1,5 @@
 import sys
+
 from class_generator import QuickRestoClassGenerator
 from quick_resto_interface import *
 

@@ -1,6 +1,8 @@
-from quick_resto_objects.modules.warehouse.documents.outgoing.outgoing_invoice import CustomerType, convert_str_to_customer_type
+from quick_resto_objects.modules.warehouse.documents.outgoing.outgoing_invoice import convert_str_to_customer_type, \
+    CustomerType
 from quick_resto_objects.modules.warehouse.store.store import Store
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class DiscardInvoice(QuickRestoObject):
     @property
@@ -59,9 +61,11 @@ class DiscardInvoice(QuickRestoObject):
     def guest(self) -> dict:
         return self._guest
 
-    def __init__(self, documentNumber: str=None, invoiceDate: str=None, customerType: str=None, store: dict=None, processed: bool=None, totalSum: float=None, 
-                totalSumWoNds: float=None, totalNds: float=None, comment: str=None, totalAmount: float=None, discardReason: dict = None, 
-                subject: dict = None, operator:dict = None, guest:dict = None,**kwargs):
+    def __init__(self, documentNumber: str = None, invoiceDate: str = None, customerType: str = None,
+                 store: dict = None, processed: bool = None, totalSum: float = None,
+                 totalSumWoNds: float = None, totalNds: float = None, comment: str = None, totalAmount: float = None,
+                 discardReason: dict = None,
+                 subject: dict = None, operator: dict = None, guest: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.discard.DiscardInvoice"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -69,7 +73,7 @@ class DiscardInvoice(QuickRestoObject):
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
         self._customer_type = convert_str_to_customer_type(customerType)
-        if (store!=None):self._store = Store(**store)
+        if (store != None): self._store = Store(**store)
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

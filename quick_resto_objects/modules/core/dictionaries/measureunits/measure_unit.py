@@ -1,12 +1,15 @@
 from enum import Enum
+
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
-class SystemUnit(Enum): 
-    ITEM = "ITEM", 
+
+class SystemUnit(Enum):
+    ITEM = "ITEM",
     KG = "KG",
     L = "L",
     RATION = "RATION",
     Custom = "Custom"
+
 
 StrToSystemUnit = {
     SystemUnit.ITEM.value: SystemUnit.ITEM,
@@ -22,6 +25,7 @@ def convert_str_to_system_unit(value: str) -> SystemUnit:
         return StrToSystemUnit[value]
 
     return SystemUnit.Custom
+
 
 class MeasureUnit(QuickRestoObject):
     @property
@@ -48,8 +52,9 @@ class MeasureUnit(QuickRestoObject):
     def code(self) -> str:
         return self._code
 
-    def __init__(self, name: str = None, fullName: str = None, isMainUnit: bool = None, parentRatio: float = None, code: str = None, 
-                    systemUnit: str = "ITEM", **kwargs):
+    def __init__(self, name: str = None, fullName: str = None, isMainUnit: bool = None, parentRatio: float = None,
+                 code: str = None,
+                 systemUnit: str = "ITEM", **kwargs):
         class_name = "ru.edgex.quickresto.modules.core.dictionaries.measureunits.MeasureUnit"
 
         super().__init__(class_name=class_name, **kwargs)

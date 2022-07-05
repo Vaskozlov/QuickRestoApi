@@ -1,5 +1,7 @@
 from enum import Enum
+
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class DeviceState(Enum):
     ACTIVE = "ACTIVE"
@@ -12,11 +14,13 @@ StrToDeviceState = {
     DeviceState.INACTIVE.value: DeviceState.INACTIVE,
 }
 
+
 def convert_str_to_device_state(value: str) -> DeviceState:
     if value in StrToDeviceState.keys():
         return StrToDeviceState[value]
 
     return DeviceState.NONE
+
 
 class DeviceCommand(QuickRestoObject):
     @property
@@ -27,7 +31,7 @@ class DeviceCommand(QuickRestoObject):
     def state(self) -> DeviceState:
         return self._state
 
-    def __init__(self, version: int=None, state: str=None, **kwargs):
+    def __init__(self, version: int = None, state: str = None, **kwargs):
         class_name = ""
         super().__init__(class_name=class_name, **kwargs)
 

@@ -1,10 +1,11 @@
-from quick_resto_objects.modules.crm.settings.fixed.fixed_discount import TypeDiscount, convert_str_to_type_discount
+from quick_resto_objects.modules.crm.settings.fixed.fixed_discount import convert_str_to_type_discount, TypeDiscount
 from quick_resto_objects.modules.crm.settings.markup.markup import Day, TimeRange
 from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
 from quick_resto_objects.modules.warehouse.nomenclature.dish.dish_category import DishCategory
 from quick_resto_objects.modules.warehouse.nomenclature.mods.modifier_group import ModifierGroup
 from quick_resto_objects.modules.warehouse.nomenclature.sale_place.sale_place import SalePlace
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class ScheduledDiscount(QuickRestoObject):
     @property
@@ -55,22 +56,24 @@ class ScheduledDiscount(QuickRestoObject):
     def days(self) -> list:
         return self._days
 
-    def __init__(self, name: str=None, deleted: bool=None, typeDiscount: str=None, value: float=None, categories: set=None, dishes: set=None, 
-                    tags: set=None, modifierGroups: list=None, salePlaces: set=None, dateRange: dict=None, days: list=None,
-                    operatorCancellable:bool=None, **kwargs):
+    def __init__(self, name: str = None, deleted: bool = None, typeDiscount: str = None, value: float = None,
+                 categories: set = None, dishes: set = None,
+                 tags: set = None, modifierGroups: list = None, salePlaces: set = None, dateRange: dict = None,
+                 days: list = None,
+                 operatorCancellable: bool = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.settings.scheduled.ScheduledDiscount"
-        
+
         super().__init__(class_name=class_name, **kwargs)
 
         self._name: str = name
         self._deleted: bool = deleted
         self._type_discount = convert_str_to_type_discount(typeDiscount)
-        if (dateRange!=None):self._date_range = TimeRange(**dateRange)
+        if (dateRange != None): self._date_range = TimeRange(**dateRange)
         self._operator_cancellable = operatorCancellable
         self._value: float = value
-        if (categories!=None):self._categories: set = [DishCategory(**category) for category in categories]
+        if (categories != None): self._categories: set = [DishCategory(**category) for category in categories]
         self._dishes: set = [Dish(**dish) for dish in dishes]
         self._tags: set = tags
-        if (modifierGroups!=None):self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        if (salePlaces!=None):self._sale_places: set = [SalePlace(**place) for place in salePlaces]
-        if (days!=None):self._days: list = [Day(**day) for day in days]
+        if (modifierGroups != None): self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        if (salePlaces != None): self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+        if (days != None): self._days: list = [Day(**day) for day in days]

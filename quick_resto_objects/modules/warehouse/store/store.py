@@ -1,6 +1,7 @@
 from quick_resto_objects.modules.warehouse.store.employee.employee import Employee
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Store(QuickRestoObject):
     @property
     def title(self) -> str:
@@ -18,7 +19,8 @@ class Store(QuickRestoObject):
     def lite_business(self) -> Employee:
         return self._lite_business
 
-    def __init__(self, storeCode: str=None, title: str=None, liteBusiness: dict=None, description: str = "", **kwargs):
+    def __init__(self, storeCode: str = None, title: str = None, liteBusiness: dict = None, description: str = "",
+                 **kwargs):
         class_name: str = "ru.edgex.quickresto.modules.warehouse.store.Store"
 
         super().__init__(class_name=class_name, **kwargs)

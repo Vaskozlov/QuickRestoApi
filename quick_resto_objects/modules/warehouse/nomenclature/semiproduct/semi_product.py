@@ -2,6 +2,7 @@ from quick_resto_objects.modules.core.dictionaries.measureunits.measure_unit imp
 from quick_resto_objects.modules.core.dictionaries.storeitemtag.store_item_tag import StoreItemTag
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class SemiProduct(QuickRestoObject):
     @property
     def name(self) -> str:
@@ -59,9 +60,12 @@ class SemiProduct(QuickRestoObject):
     def recipe(self) -> str:
         return self._recipe
 
-    def __init__(self, version: int=None, serverRegisterTime: str=None, name: str=None, article: str=None, measureUnit: dict=None, storeItemTag: dict=None, 
-                ratio: float=None, minimalPrice: float=None, excludeDiscount: bool=None, excludeMarkup: bool=None, storeQuantityKg: float=None, 
-                limit: float=None, itemTitle: str=None, basePriceInList: float=None, pack: float=None, recipe: str=None, **kwargs):
+    def __init__(self, version: int = None, serverRegisterTime: str = None, name: str = None, article: str = None,
+                 measureUnit: dict = None, storeItemTag: dict = None,
+                 ratio: float = None, minimalPrice: float = None, excludeDiscount: bool = None,
+                 excludeMarkup: bool = None, storeQuantityKg: float = None,
+                 limit: float = None, itemTitle: str = None, basePriceInList: float = None, pack: float = None,
+                 recipe: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.nomenclature.semiproduct.SemiProduct"
         super().__init__(class_name=class_name, **kwargs)
 
@@ -69,8 +73,8 @@ class SemiProduct(QuickRestoObject):
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
         self._article: str = article
-        if (measureUnit!=None):self._measure_unit = MeasureUnit(**measureUnit)
-        if (storeItemTag!=None):self._store_item_tag: dict = StoreItemTag(**storeItemTag)
+        if (measureUnit != None): self._measure_unit = MeasureUnit(**measureUnit)
+        if (storeItemTag != None): self._store_item_tag: dict = StoreItemTag(**storeItemTag)
         self._ratio: float = ratio
         self._minimal_price: float = minimalPrice
         self._exclude_discount: bool = excludeDiscount

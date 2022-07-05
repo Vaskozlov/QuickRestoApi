@@ -1,8 +1,10 @@
 from enum import Enum
+
 from quick_resto_objects.modules.front.tablemanagement.table_scheme import TableScheme
 from quick_resto_objects.modules.front.terminals.device_command import DeviceCommand
 from quick_resto_objects.modules.warehouse.providers.organization import Organization
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class HardwareState(Enum):
     NEW = "NEW"
@@ -12,6 +14,7 @@ class HardwareState(Enum):
     DEACTIVATIN = "DEACTIVATING"
     DELETED = "DELETED"
     NONE = "NONE"
+
 
 StrToHardwareState = {
     HardwareState.NEW.value: HardwareState.NEW,
@@ -28,6 +31,7 @@ def convert_str_to_hardware_state(value: str) -> HardwareState:
         return StrToHardwareState[value]
 
     return HardwareState.NONE
+
 
 class TicketDevice(QuickRestoObject):
     @property
@@ -94,9 +98,12 @@ class TicketDevice(QuickRestoObject):
     def organization(self) -> Organization:
         return self._organization
 
-    def __init__(self, code1C: str=None, macAddress: str=None, manufacturer: str=None, model: str=None, connected: bool=None, 
-                deviceId: str=None, deleted: bool=None, name: str=None, serialNumber: str=None, command: dict=None, tableScheme: dict=None, 
-                business: dict=None, state: str=None, kkmMode: bool=None, symbolsPerLine: int=None, organization: dict=None, **kwargs):
+    def __init__(self, code1C: str = None, macAddress: str = None, manufacturer: str = None, model: str = None,
+                 connected: bool = None,
+                 deviceId: str = None, deleted: bool = None, name: str = None, serialNumber: str = None,
+                 command: dict = None, tableScheme: dict = None,
+                 business: dict = None, state: str = None, kkmMode: bool = None, symbolsPerLine: int = None,
+                 organization: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.terminals.ticketdevices.TicketDevice"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -110,10 +117,10 @@ class TicketDevice(QuickRestoObject):
         self._deleted: bool = deleted
         self._name: str = name
         self._serial_number: str = serialNumber
-        if (command!=None):self._command = DeviceCommand(**command)
-        if (tableScheme!=tableScheme):self._table_scheme = TableScheme(**tableScheme)
+        if (command != None): self._command = DeviceCommand(**command)
+        if (tableScheme != tableScheme): self._table_scheme = TableScheme(**tableScheme)
         self._business: dict = business
         self._state = convert_str_to_hardware_state(state)
         self._kkm_mode: bool = kkmMode
         self._symbols_per_line: int = symbolsPerLine
-        if (organization!=organization):self._organization = Organization(**organization)
+        if (organization != organization): self._organization = Organization(**organization)

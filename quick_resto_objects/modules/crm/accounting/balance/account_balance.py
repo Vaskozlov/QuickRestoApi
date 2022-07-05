@@ -18,7 +18,8 @@ class AccountBalance(QuickRestoObject):
     def ledger(self) -> float:
         return self._ledger
 
-    def __init__(self, available: float=None, creditHold: float=None, debitHold: float=None, ledger: float=None, **kwargs):
+    def __init__(self, available: float = None, creditHold: float = None, debitHold: float = None, ledger: float = None,
+                 **kwargs):
         class_name = 'ru.edgex .quickresto.modules.crm.accounting.account.balance.AccountBalance'
 
         super().__init__(id=0, class_name=class_name, **kwargs)

@@ -2,6 +2,7 @@ from quick_resto_objects.modules.front.tablemanagement.table_scheme import Table
 from quick_resto_objects.modules.front.terminals.device_command import DeviceCommand
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class VirtualPosTerminal(QuickRestoObject):
     @property
     def device_id(self) -> str:
@@ -63,10 +64,13 @@ class VirtualPosTerminal(QuickRestoObject):
     def pos_printing_type(self) -> str:
         return self._pos_printing_type
 
-    def __init__(self, deviceId: str=None, manufacturer: str=None, model: str=None, connected: bool=None, name: str=None, 
-                deleted: bool=None, activateOnCurrentTerminal: bool=None, state: str=None, tableScheme: dict=None, command: dict=None, 
-                business: dict=None, connectionKind: str=None, posAdditionalInfo: str=None, arcus2Protocol: str=None, 
-                posPrintingType: str=None, **kwargs):
+    def __init__(self, deviceId: str = None, manufacturer: str = None, model: str = None, connected: bool = None,
+                 name: str = None,
+                 deleted: bool = None, activateOnCurrentTerminal: bool = None, state: str = None,
+                 tableScheme: dict = None, command: dict = None,
+                 business: dict = None, connectionKind: str = None, posAdditionalInfo: str = None,
+                 arcus2Protocol: str = None,
+                 posPrintingType: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.terminals.pos.VirtualPosTerminal"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -79,8 +83,8 @@ class VirtualPosTerminal(QuickRestoObject):
         self._deleted: bool = deleted
         self._activate_on_current_terminal: bool = activateOnCurrentTerminal
         self._state: str = state
-        if (tableScheme!=None):self._table_scheme = TableScheme(**tableScheme)
-        if (command!=None):self._command = DeviceCommand(**command)
+        if (tableScheme != None): self._table_scheme = TableScheme(**tableScheme)
+        if (command != None): self._command = DeviceCommand(**command)
         self._business: dict = business
         self._connection_kind: str = connectionKind
         self._pos_additional_info: str = posAdditionalInfo

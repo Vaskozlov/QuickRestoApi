@@ -1,4 +1,5 @@
 from enum import Enum
+
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
 
@@ -30,7 +31,7 @@ class ContactMethod(QuickRestoObject):
     def contact_type(self) -> ContactMethodType:
         return self._contact_type
 
-    def __init__(self, type: str=None, value: str=None, **kwargs):
+    def __init__(self, type: str = None, value: str = None, **kwargs):
         class_name: str = 'modules.crm.accounting.account.contact_method'
 
         super().__init__(id=0, class_name=class_name, **kwargs)

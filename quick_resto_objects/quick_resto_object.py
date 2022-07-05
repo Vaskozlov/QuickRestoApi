@@ -1,6 +1,7 @@
 import json
-import styler
 from enum import Enum
+
+import styler
 
 
 class QuickRestoObject(object):

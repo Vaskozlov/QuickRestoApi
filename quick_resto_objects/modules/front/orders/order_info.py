@@ -4,6 +4,7 @@ from quick_resto_objects.modules.front.zreport.shift import Shift
 from quick_resto_objects.modules.personnel.employee.employee import Employee
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class OrderInfo(QuickRestoObject):
     @property
     def comment(self) -> str:
@@ -113,12 +114,17 @@ class OrderInfo(QuickRestoObject):
     def waiter(self) -> Employee:
         return self._waiter
 
-    def __init__(self, comment: str=None, createDate: str=None, documentNumber: int=None, discountPercent: int=None, cashier: dict=None, extId: str=None, 
-                front: dict=None, frontSum: int=None, frontTotalAbsoluteCharge: int=None, frontTotalAbsoluteDiscount: int=None, frontTotalBonuses: int=None, 
-                frontTotalCard: int=None, frontTotalCashMinusDiscount: int=None, frontTotalDiscount: int=None, frontTotalPrice: int=None, 
-                kkmTerminalName: str=None, originalOrderDocId: str=None, precheckDocId: str=None, reopenedOrderDocId: str=None, returned: bool=None, 
-                returnOrderDocId: str=None, shift: dict=None, shiftId: str=None, table: dict=None, tableOrderDocId: str=None, totalSum: int=None, 
-                waiter: dict=None, **kwargs):
+    def __init__(self, comment: str = None, createDate: str = None, documentNumber: int = None,
+                 discountPercent: int = None, cashier: dict = None, extId: str = None,
+                 front: dict = None, frontSum: int = None, frontTotalAbsoluteCharge: int = None,
+                 frontTotalAbsoluteDiscount: int = None, frontTotalBonuses: int = None,
+                 frontTotalCard: int = None, frontTotalCashMinusDiscount: int = None, frontTotalDiscount: int = None,
+                 frontTotalPrice: int = None,
+                 kkmTerminalName: str = None, originalOrderDocId: str = None, precheckDocId: str = None,
+                 reopenedOrderDocId: str = None, returned: bool = None,
+                 returnOrderDocId: str = None, shift: dict = None, shiftId: str = None, table: dict = None,
+                 tableOrderDocId: str = None, totalSum: int = None,
+                 waiter: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.orders.OrderInfo"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -127,9 +133,9 @@ class OrderInfo(QuickRestoObject):
         self._create_date: str = createDate
         self._document_number: int = documentNumber
         self._discount_percent: int = discountPercent
-        if (cashier!=None):self._cashier = Employee(**cashier)
+        if (cashier != None): self._cashier = Employee(**cashier)
         self._ext_id: str = extId
-        if (front!=None):self._front = Terminal(**front)
+        if (front != None): self._front = Terminal(**front)
         self._front_sum: int = frontSum
         self._front_total_absolute_charge: int = frontTotalAbsoluteCharge
         self._front_total_absolute_discount: int = frontTotalAbsoluteDiscount
@@ -144,9 +150,9 @@ class OrderInfo(QuickRestoObject):
         self._reopened_order_doc_id: str = reopenedOrderDocId
         self._returned: bool = returned
         self._return_order_doc_id: str = returnOrderDocId
-        if (shift!=None):self._shift = Shift(**shift)
+        if (shift != None): self._shift = Shift(**shift)
         self._shift_id: str = shiftId
-        if (table!=None):self._table = Table(**table)
+        if (table != None): self._table = Table(**table)
         self._table_order_doc_id: str = tableOrderDocId
         self._total_sum: int = totalSum
-        if (waiter!=None):self._waiter = Employee(**waiter)
+        if (waiter != None): self._waiter = Employee(**waiter)

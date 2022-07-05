@@ -1,13 +1,12 @@
 from datetime import date
+
 from operations_with_objects import OperationsWithObjects
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.modules.crm.accounting.account.account_type import AccountType
 from quick_resto_objects.modules.crm.accounting.balance.account_balance import AccountBalance
 from quick_resto_objects.modules.crm.customer.customer import CrmCustomer
 from quick_resto_objects.modules.crm.customer.customer_token import CustomerToken
-from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
-from quick_resto_objects.modules.warehouse.nomenclature.dish.dish_category import DishCategory
-from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class QuickRestoInterface:
     def __init__(self, login: str, password: str, use_https: bool = True, layer: str = "quickresto.ru"):
@@ -52,19 +51,19 @@ class QuickRestoInterface:
             "customerToken": customerToken.get_json_object()
         }
 
-        json_response = self._api.post("bonuses/operationHistory", json_data = json_data).json()
+        json_response = self._api.post("bonuses/operationHistory", json_data=json_data).json()
 
         return json_response
 
     def crm_create_customer(self, customer: CrmCustomer) -> CrmCustomer:
         json_data = customer.get_json_object()
 
-        json_response = self._api.post("bonuses/createCustomer", json_data = json_data).json()
+        json_response = self._api.post("bonuses/createCustomer", json_data=json_data).json()
 
         return CrmCustomer(**json_response)
 
-    def crm_depit_hold(self, customerToken: CustomerToken, amount: int, accountType: AccountType, date: date = None, 
-                    precheck: int = None) -> dict:
+    def crm_depit_hold(self, customerToken: CustomerToken, amount: int, accountType: AccountType, date: date = None,
+                       precheck: int = None) -> dict:
         json_data = {
             "customerToken": customerToken.get_json_object(),
             "date": date,
@@ -73,11 +72,11 @@ class QuickRestoInterface:
             "accountType": accountType.get_json_object(),
         }
 
-        json_response = self._api.post("bonuses/debitHold", json_data = json_data).json()
+        json_response = self._api.post("bonuses/debitHold", json_data=json_data).json()
 
         return json_response
 
-    def crm_credit_hold(self, customerToken: CustomerToken, accountType: AccountType, amount: int, date: date = None, 
+    def crm_credit_hold(self, customerToken: CustomerToken, accountType: AccountType, amount: int, date: date = None,
                         precheck: int = None) -> dict:
         json_data = {
             "customerToken": customerToken.get_json_object(),
@@ -87,11 +86,11 @@ class QuickRestoInterface:
             "accountType": accountType.get_json_object(),
         }
 
-        json_response = self._api.post("bonuses/creditHold", json_data = json_data).json()
+        json_response = self._api.post("bonuses/creditHold", json_data=json_data).json()
 
         return json_response
 
-    def crm_reverse(self, customerToken: CustomerToken, accountType: AccountType, amount: int, bonusTransactionId: int, 
+    def crm_reverse(self, customerToken: CustomerToken, accountType: AccountType, amount: int, bonusTransactionId: int,
                     date: date = None, precheck: int = None) -> dict:
         json_data = {
             "customerToken": customerToken.get_json_object(),
@@ -102,13 +101,13 @@ class QuickRestoInterface:
             "bonusTransactionId": bonusTransactionId
         }
 
-        json_response = self._api.post("bonuses/reverse", json_data = json_data).json()
+        json_response = self._api.post("bonuses/reverse", json_data=json_data).json()
 
         return json_response
-    
+
     # def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None, 
     #                             showDeleted: bool = False) -> set:
-                                
+
     #     json_response = self._operations_with_objects.getList("warehouse.nomenclature.dish", 
     #                                             ownerContextId, ownerContextClassName, showDeleted).json()
 
@@ -121,7 +120,6 @@ class QuickRestoInterface:
     #             dishes.add(Dish(**dish))
 
     #     return json_response
-
 
     # def get_stores(self) -> set:
     #     stores = set()
@@ -149,8 +147,3 @@ class QuickRestoInterface:
 
     # def _get_system_object(self, url: str) -> requests.Response:
     #     return self._api.get(f"api/list?moduleName={url}")
-
-
-    
-        
-        

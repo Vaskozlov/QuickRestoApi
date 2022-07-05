@@ -1,6 +1,7 @@
 from quick_resto_objects.platform.service.user.right_link import RightLink
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Role(QuickRestoObject):
     @property
     def system_role(self) -> str:
@@ -26,8 +27,9 @@ class Role(QuickRestoObject):
     def right_links(self) -> list:
         return self._right_links
 
-    def __init__(self, systemRole: str=None, title: str=None, backOfficeUser: bool=None, frontOfficeUser: bool=None, courierUser: bool=None, 
-                    rightLinks: list=None, **kwargs):
+    def __init__(self, systemRole: str = None, title: str = None, backOfficeUser: bool = None,
+                 frontOfficeUser: bool = None, courierUser: bool = None,
+                 rightLinks: list = None, **kwargs):
         class_name = "ru.edgex.platform.service.user.Role"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -37,4 +39,4 @@ class Role(QuickRestoObject):
         self._back_office_user: bool = backOfficeUser
         self._front_office_user: bool = frontOfficeUser
         self._courier_user: bool = courierUser
-        if (rightLinks!=None):self._right_links: list = [RightLink(**value) for value in rightLinks]
+        if (rightLinks != None): self._right_links: list = [RightLink(**value) for value in rightLinks]

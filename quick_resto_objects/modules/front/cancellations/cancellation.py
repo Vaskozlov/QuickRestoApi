@@ -1,6 +1,7 @@
 from quick_resto_objects.modules.personnel.employee.employee import Employee
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Cancellation(QuickRestoObject):
     @property
     def comment(self) -> str:
@@ -30,8 +31,9 @@ class Cancellation(QuickRestoObject):
     def table_order_doc_id(self) -> str:
         return self._table_order_doc_id
 
-    def __init__(self, comment: str=None, description: str=None, parentOrderDocId: str=None, withDismission: bool=None, 
-                employee: dict=None, parentReturnOrderDocId: str=None, tableOrderDocId: str=None, **kwargs):
+    def __init__(self, comment: str = None, description: str = None, parentOrderDocId: str = None,
+                 withDismission: bool = None,
+                 employee: dict = None, parentReturnOrderDocId: str = None, tableOrderDocId: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.cancellations.Cancellation"
 
         super().__init__(class_name=class_name, **kwargs)
@@ -40,6 +42,6 @@ class Cancellation(QuickRestoObject):
         self._description: str = description
         self._parent_order_doc_id: str = parentOrderDocId
         self._with_dismission: bool = withDismission
-        if (employee!=None):self._employee = Employee(**employee)
+        if (employee != None): self._employee = Employee(**employee)
         self._parent_return_order_doc_id: str = parentReturnOrderDocId
         self._table_order_doc_id: str = tableOrderDocId

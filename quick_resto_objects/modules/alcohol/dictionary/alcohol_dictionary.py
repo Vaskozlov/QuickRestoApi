@@ -1,6 +1,7 @@
 from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class AlcoholDictionary(QuickRestoObject):
     @property
     def deleted(self) -> bool:
@@ -26,8 +27,8 @@ class AlcoholDictionary(QuickRestoObject):
     def store_product(self) -> Dish:
         return self._store_product
 
-    def __init__(self, deleted: bool = None, egaisName: str = None, egaisSize: int = None, egaisTypeCode: str = None, 
-                showOnTerminal: bool = None, storeProduct: dict = None, **kwargs):
+    def __init__(self, deleted: bool = None, egaisName: str = None, egaisSize: int = None, egaisTypeCode: str = None,
+                 showOnTerminal: bool = None, storeProduct: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.alcohol.dictionary.AlcoholDictionary"
 
         super().__init__(class_name=class_name, **kwargs)

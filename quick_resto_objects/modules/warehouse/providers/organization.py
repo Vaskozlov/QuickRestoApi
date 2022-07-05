@@ -1,5 +1,6 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Organization(QuickRestoObject):
     @property
     def short_name(self) -> str:
@@ -25,8 +26,8 @@ class Organization(QuickRestoObject):
     def full_name(self) -> str:
         return self._full_name
 
-    def __init__(self, shortName: str=None, address: str=None, deliveryAddress: str=None, egaisStatus: str=None, 
-                egaisActivityStatus: str=None, fullName: str=None, **kwargs):
+    def __init__(self, shortName: str = None, address: str = None, deliveryAddress: str = None, egaisStatus: str = None,
+                 egaisActivityStatus: str = None, fullName: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.providers.Organization"
 
         super().__init__(class_name=class_name, **kwargs)

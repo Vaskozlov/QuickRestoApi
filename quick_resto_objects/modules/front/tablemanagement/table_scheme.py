@@ -2,6 +2,7 @@ from quick_resto_objects.modules.front.tablemanagement.hall.hall import Hall
 from quick_resto_objects.modules.front.tablemanagement.table.table import Table
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class TableScheme(QuickRestoObject):
     @property
     def current_load(self) -> int:
@@ -43,8 +44,9 @@ class TableScheme(QuickRestoObject):
     def halls(self) -> list:
         return self._halls
 
-    def __init__(self, currentLoad: int=None, deleted: bool=None, width: int=None, height: int=None, itemTitle: str=None, maxCapacity: int=None,
-                 name: str=None, tables: list=None, reservations: list=None,halls:list=None, **kwargs):
+    def __init__(self, currentLoad: int = None, deleted: bool = None, width: int = None, height: int = None,
+                 itemTitle: str = None, maxCapacity: int = None,
+                 name: str = None, tables: list = None, reservations: list = None, halls: list = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.tablemanagement.TableScheme"
 
         super().__init__(class_name=class_name, **kwargs)

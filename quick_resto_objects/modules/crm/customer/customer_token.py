@@ -1,5 +1,7 @@
 from enum import Enum
+
 from quick_resto_objects.quick_resto_object import QuickRestoObject
+
 
 class TokenType(Enum):
     NONE = "NONE"
@@ -49,6 +51,7 @@ def convert_str_to_crm_entry_type(crm_entry_type: str) -> EntryType:
 
     return EntryType.NONE
 
+
 class CustomerToken(QuickRestoObject):
     @property
     def token_type(self) -> TokenType:
@@ -62,7 +65,7 @@ class CustomerToken(QuickRestoObject):
     def key(self) -> str:
         return self._key
 
-    def __init__(self, entry: str=None, key: str=None, type: str=None, **kwargs):
+    def __init__(self, entry: str = None, key: str = None, type: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.crm.customer.CrmToken"
 
         super().__init__(class_name=class_name, **kwargs)

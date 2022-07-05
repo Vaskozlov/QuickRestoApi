@@ -1,5 +1,6 @@
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class Business(QuickRestoObject):
     @property
     def account(self) -> str:
@@ -49,9 +50,11 @@ class Business(QuickRestoObject):
     def short_name(self) -> str:
         return self._short_name
 
-    def __init__(self, account: str=None, address: str=None, bankId: str=None, bankName: str=None, correspondentAccount: str=None, 
-            deliveryAddress: str=None, deleted: bool=None, innCode: str=None, kppCode: str=None, name: str=None, okpoCode: str=None, 
-            shortName: str=None, **kwargs):
+    def __init__(self, account: str = None, address: str = None, bankId: str = None, bankName: str = None,
+                 correspondentAccount: str = None,
+                 deliveryAddress: str = None, deleted: bool = None, innCode: str = None, kppCode: str = None,
+                 name: str = None, okpoCode: str = None,
+                 shortName: str = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.core.company.businesses.Business"
 
         super().__init__(class_name=class_name, **kwargs)

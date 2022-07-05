@@ -1,13 +1,16 @@
 from enum import Enum
+
 from quick_resto_objects.modules.front.tablemanagement.table_scheme import TableScheme
 from quick_resto_objects.modules.warehouse.nomenclature.cooking_place.cooking_place import CookingPlace
 from quick_resto_objects.modules.warehouse.nomenclature.sale_place.sale_place import SalePlace
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
+
 class TerminalSubtype(Enum):
     REGISTER = "REGISTER"
     WAITER = "WAITER"
     NONE = "NONE"
+
 
 class TerminalType(Enum):
     QUICK_POS = "QUICK_POS"
@@ -34,11 +37,13 @@ def convert_str_to_terminal_subtype(value: str) -> TerminalSubtype:
 
     return TerminalSubtype.NONE
 
+
 def convert_str_to_terminal_type(value: str) -> TerminalType:
     if value in StrToTerminalType.keys():
         return StrToTerminalType[value]
 
     return TerminalType.NONE
+
 
 class Terminal(QuickRestoObject):
     @property
@@ -93,14 +98,17 @@ class Terminal(QuickRestoObject):
     def terminal_type(self) -> TerminalType:
         return self._terminal_type
 
-    def __init__(self, cookingPlace: dict=None, deleted: bool=None, deviceManufacturer: str=None, deviceModel: str=None, 
-                lastSync: str=None, name: str=None, online: bool=None, registrationDate: str=None, salePlace: dict=None, 
-                shortName: str=None, tableScheme: dict=None, terminalSubtype: dict=None, terminalType: dict=None, **kwargs):
+    def __init__(self, cookingPlace: dict = None, deleted: bool = None, deviceManufacturer: str = None,
+                 deviceModel: str = None,
+                 lastSync: str = None, name: str = None, online: bool = None, registrationDate: str = None,
+                 salePlace: dict = None,
+                 shortName: str = None, tableScheme: dict = None, terminalSubtype: dict = None,
+                 terminalType: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.front.terminals.ipad.Terminal"
 
         super().__init__(class_name=class_name, **kwargs)
 
-        if (cookingPlace!=None):self._cooking_place = CookingPlace(**cookingPlace)
+        if (cookingPlace != None): self._cooking_place = CookingPlace(**cookingPlace)
         self._deleted: bool = deleted
         self._device_manufacturer: str = deviceManufacturer
         self._device_model: str = deviceModel
@@ -108,8 +116,8 @@ class Terminal(QuickRestoObject):
         self._name: str = name
         self._online: bool = online
         self._registration_date: str = registrationDate
-        if (salePlace!=None):self._sale_place = SalePlace(**salePlace)
+        if (salePlace != None): self._sale_place = SalePlace(**salePlace)
         self._short_name: str = shortName
-        if (tableScheme!=None):self._table_scheme = TableScheme(**tableScheme)
+        if (tableScheme != None): self._table_scheme = TableScheme(**tableScheme)
         self._terminal_subtype = convert_str_to_terminal_subtype(terminalSubtype)
         self._terminal_type = convert_str_to_terminal_type(terminalType)
