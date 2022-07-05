@@ -64,7 +64,7 @@ class ScheduledDiscount(QuickRestoObject):
 
         self._name: str = name
         self._deleted: bool = deleted
-        self._type_discount: str = convert_str_to_type_discount(typeDiscount)
+        self._type_discount = convert_str_to_type_discount(typeDiscount)
         if (dateRange!=None):self._date_range = TimeRange(**dateRange)
         self._operator_cancellable = operatorCancellable
         self._value: float = value

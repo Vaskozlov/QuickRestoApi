@@ -71,7 +71,7 @@ class FixedDiscount(QuickRestoObject):
 
         self._name: str = name
         self._deleted: bool = deleted
-        self._type_discount: str = convert_str_to_type_discount(typeDiscount)
+        self._type_discount = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
         if (categories!=None):self._categories: set = [DishCategory(**category) for category in categories]
         if (dishes!=None):self._dishes: set = [Dish(**dish) for dish in dishes]

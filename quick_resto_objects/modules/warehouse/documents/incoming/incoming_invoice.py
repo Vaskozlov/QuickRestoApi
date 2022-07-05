@@ -62,7 +62,7 @@ class IncomingInvoice(QuickRestoObject):
         self._paid: bool = paid
         self._total_amount: float = totalAmount
 
-        if (provider!=None):
+        if provider!=None:
             if (provider is Businessman): self._provider = Businessman(**provider)
             elif (provider is NaturalPerson): self._provider = NaturalPerson(**provider)
             elif (provider is Organization): self._provider = Organization

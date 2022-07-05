@@ -66,7 +66,7 @@ class SingleProduct(QuickRestoObject):
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
         self._article: str = article
-        if (measureUnit!=None):self._measure_unit: dict = MeasureUnit(**measureUnit)
+        if (measureUnit!=None):self._measure_unit = MeasureUnit(**measureUnit)
         self._ratio: float = ratio
         if(storeItemTag!=None):self._store_item_tag = StoreItemTag(**storeItemTag)
         self._minimal_price: float = minimalPrice

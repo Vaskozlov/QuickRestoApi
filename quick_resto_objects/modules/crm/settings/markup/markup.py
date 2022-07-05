@@ -99,7 +99,7 @@ class Markup(QuickRestoObject):
 
         self._name: str = name
         self._deleted: bool = deleted
-        self._type_discount: str = convert_str_to_type_discount(typeDiscount)
+        self._type_discount = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
         self._operator_cancellable: bool = operatorCancellable
         if (dateRange!=None):self._date_range: dict = TimeRange(**dateRange)

@@ -37,5 +37,5 @@ class CookingPlace(QuickRestoObject):
         self._title: str = title
 
         self._backup_target_device = backupTargetDevice
-        self._doublicating_target_Device = doublicatingTargetDevice
+        self._doublicating_target_Device = TerminalDevice(**doublicatingTargetDevice)
         self._target_Device = targetDevice

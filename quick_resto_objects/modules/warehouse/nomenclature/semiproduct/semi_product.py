@@ -69,7 +69,7 @@ class SemiProduct(QuickRestoObject):
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
         self._article: str = article
-        if (measureUnit!=None):self._measure_unit: dict = MeasureUnit(**measureUnit)
+        if (measureUnit!=None):self._measure_unit = MeasureUnit(**measureUnit)
         if (storeItemTag!=None):self._store_item_tag: dict = StoreItemTag(**storeItemTag)
         self._ratio: float = ratio
         self._minimal_price: float = minimalPrice
