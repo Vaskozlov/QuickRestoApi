@@ -43,21 +43,24 @@ class ExchangeInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, fromStore: dict = None, documentNumber: str = None, invoiceDate: str = None, store: dict = None,
-                 processed: bool = None,
-                 totalSum: float = None, totalSumWoNds: float = None, totalNds: float = None, comment: str = None,
-                 totalAmount: float = None, **kwargs):
+    def __init__(self, documentNumber: str, invoiceDate: str, processed: bool, totalSum: float, totalSumWoNds: float,
+                 totalNds: float, comment: str, totalAmount: float, fromStore: dict = None, store: dict = None,
+                 **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.exchange.ExchangeInvoice"
 
         super().__init__(class_name=class_name, **kwargs)
 
-        if (fromStore != None): self._from_store = Store(**fromStore)
-        self._document_number: str = documentNumber
-        self._invoice_date: str = invoiceDate
-        if (store != store): self._store = Store(**store)
-        self._processed: bool = processed
-        self._total_sum: float = totalSum
-        self._total_sum_wo_nds: float = totalSumWoNds
-        self._total_nds: float = totalNds
-        self._comment: str = comment
-        self._total_amount: float = totalAmount
+        self._document_number = documentNumber
+        self._invoice_date = invoiceDate
+        self._processed = processed
+        self._total_sum = totalSum
+        self._total_sum_wo_nds = totalSumWoNds
+        self._total_nds = totalNds
+        self._comment = comment
+        self._total_amount = totalAmount
+
+        if fromStore is not None:
+            self._from_store = Store(**fromStore)
+
+        if store != store:
+            self._store = Store(**store)

@@ -97,8 +97,7 @@ class OutgoingInvoice(QuickRestoObject):
 
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        if (customerType != None): self._customer_type: CustomerType = convert_str_to_customer_type(customerType)
-        if (store != None): self._store = Store(**store)
+
         self._processed: bool = processed
         self._subject: dict = subject
         self._operator: dict = operator
@@ -110,3 +109,9 @@ class OutgoingInvoice(QuickRestoObject):
         self._reason: str = reason
         self._comment: str = comment
         self._total_amount: float = totalAmount
+
+        if store is not None:
+            self._store = Store(**store)
+
+        if customerType is not None:
+            self._customer_type: CustomerType = convert_str_to_customer_type(customerType)

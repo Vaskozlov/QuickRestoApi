@@ -47,30 +47,30 @@ class IncomingInvoice(QuickRestoObject):
     def total_amount(self) -> float:
         return self._total_amount
 
-    def __init__(self, documentNumber: str = None, invoiceDate: str = None, provider: dict = None, store: dict = None,
-                 processed: bool = None, totalSum: float = None,
-                 totalSumWoNds: float = None, totalNds: float = None, paid: bool = None, totalAmount: float = None,
-                 **kwargs):
+    def __init__(self, documentNumber: str, invoiceDate: str, processed: bool, totalSum: float, totalSumWoNds: float,
+                 totalNds: float, paid: bool, totalAmount: float, provider: dict = None, store: dict = None, **kwargs):
         class_name = "ru.edgex.quickresto.modules.warehouse.documents.incoming.IncomingInvoice"
 
         super().__init__(class_name=class_name, **kwargs)
 
-        self._document_number: str = documentNumber
-        self._invoice_date: str = invoiceDate
-        if (store != None): self._store = Store(**store)
-        self._processed: bool = processed
-        self._total_sum: float = totalSum
-        self._total_sum_wo_nds: float = totalSumWoNds
-        self._total_nds: float = totalNds
-        self._paid: bool = paid
-        self._total_amount: float = totalAmount
+        self._paid = paid
+        self._document_number = documentNumber
+        self._invoice_date = invoiceDate
+        self._processed = processed
+        self._total_sum = totalSum
+        self._total_sum_wo_nds = totalSumWoNds
+        self._total_nds = totalNds
+        self._total_amount = totalAmount
 
-        if provider != None:
-            if (provider is Businessman):
+        if store is not None:
+            self._store = Store(**store)
+
+        if provider is not None:
+            if provider is Businessman:
                 self._provider = Businessman(**provider)
-            elif (provider is NaturalPerson):
+            elif provider is NaturalPerson:
                 self._provider = NaturalPerson(**provider)
-            elif (provider is Organization):
+            elif provider is Organization:
                 self._provider = Organization
-            elif (provider is ProviderGroup):
+            elif provider is ProviderGroup:
                 self._provider = ProviderGroup(**provider)
