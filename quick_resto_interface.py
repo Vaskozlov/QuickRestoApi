@@ -1,4 +1,8 @@
 from datetime import date
+import json
+import csv
+import re
+import pandas
 
 import requests
 
@@ -153,3 +157,29 @@ class QuickRestoInterface:
 
     def _get_system_object(self, url: str) -> requests.Response:
         return self._api.get(f"api/list?moduleName={url}")
+
+    def convert_to_csv(self, json_data) -> str:
+        if isinstance(json_data, dict):
+            return pandas.DataFrame(json.loads(json.dumps(self._get_not_nested_json(json_data)))).to_csv()
+
+        if isinstance(json_data, list):
+            list_of_json_objects = list()
+
+            for item in json_data:
+                if isinstance(item, dict):
+                    list_of_json_objects.append(self._get_not_nested_json(item))
+
+            return pandas.DataFrame(json.loads(json.dumps(list_of_json_objects))).to_csv()
+
+    def _get_not_nested_json(self, json:dict, result_json:dict = dict(), nested_names:list = list()) -> dict:
+        for i in json.keys():
+            if isinstance(json[i], dict):
+                nested_names.append(i + "__")
+
+                self._get_not_nested_json(json[i], result_json, nested_names)
+
+                nested_names.pop()
+            else:
+                result_json["".join(nested_names) + i] =  json[i]
+
+        return result_json
