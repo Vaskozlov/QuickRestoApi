@@ -26,6 +26,8 @@ class QuickRestoObject(object):
 
             if issubclass(type(value), QuickRestoObject):
                 result[parameter_name] = value.get_json_object()
+            elif issubclass(type(value), list):
+                result[parameter_name] = [obj.get_json_object() for obj in value]
             else:
                 result[parameter_name] = value
 

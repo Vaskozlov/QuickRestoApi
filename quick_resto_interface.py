@@ -1,11 +1,17 @@
 from datetime import date
 
+import requests
+
 from operations_with_objects import OperationsWithObjects
 from quick_resto_api import QuickRestoApi
 from quick_resto_objects.modules.crm.accounting.account.account_type import AccountType
 from quick_resto_objects.modules.crm.accounting.balance.account_balance import AccountBalance
 from quick_resto_objects.modules.crm.customer.customer import CrmCustomer
 from quick_resto_objects.modules.crm.customer.customer_token import CustomerToken
+from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
+from quick_resto_objects.modules.warehouse.nomenclature.dish.dish_category import DishCategory
+from quick_resto_objects.modules.warehouse.nomenclature.singleproduct.single_product import SingleProduct
+from quick_resto_objects.modules.warehouse.store.store import Store
 
 
 class QuickRestoInterface:
@@ -18,7 +24,7 @@ class QuickRestoInterface:
         # TODO: add good error message for this case
         self._api.get("ping")
 
-    def crm_search_client(self, search: str) -> dict:
+    def crm_search_client(self, search: str) -> CrmCustomer:
         json_data = {
             "search": search
         }
@@ -105,45 +111,45 @@ class QuickRestoInterface:
 
         return json_response
 
-    # def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None, 
-    #                             showDeleted: bool = False) -> set:
+    def get_list_of_dishes(self, ownerContextId: int = None, ownerContextClassName: str = None,
+                           showDeleted: bool = False) -> set:
 
-    #     json_response = self._operations_with_objects.getList("warehouse.nomenclature.dish", 
-    #                                             ownerContextId, ownerContextClassName, showDeleted).json()
+        json_response = self._operations_with_objects.getList("warehouse.nomenclature.dish",
+                                                              ownerContextId, ownerContextClassName, showDeleted).json()
 
-    #     dishes = set()
+        dishes = set()
 
-    #     for dish in json_response:
-    #         if 'DishCategory' in dish['className']:
-    #             dishes.add(DishCategory(**dish))
-    #         elif 'Dish' in dish['className']:
-    #             dishes.add(Dish(**dish))
+        for dish in json_response:
+            if 'DishCategory' in dish['className']:
+                dishes.add(DishCategory(**dish))
+            elif 'Dish' in dish['className']:
+                dishes.add(Dish(**dish))
 
-    #     return json_response
+        return dishes
 
-    # def get_stores(self) -> set:
-    #     stores = set()
+    def get_stores(self) -> set:
+        stores = set()
 
-    #     for store in self._get_system_object("warehouse.store").json():
-    #         if 'Store' in store['className']:
-    #             stores.add(Store(**store))
+        for store in self._get_system_object("warehouse.store").json():
+            if 'Store' in store['className']:
+                stores.add(Store(**store))
 
-    #     return stores
+        return stores
 
-    # def get_table_orders(self) -> dict:
-    #     return self._get_system_object("front.tableorders").json()
+    def get_table_orders(self) -> dict:
+        return self._get_system_object("front.tableorders").json()
 
-    # def get_products(self) -> set:
-    #     products = set()
-    #     json_response = self._get_system_object("warehouse.nomenclature.singleproduct").json()
+    def get_products(self) -> set:
+        products = set()
+        json_response = self._get_system_object("warehouse.nomenclature.singleproduct").json()
 
-    #     for product in json_response:
-    #         products.add(SingleProduct(**product))
+        for product in json_response:
+            products.add(SingleProduct(**product))
 
-    #     return products
+        return products
 
-    # def get_employees(self) -> dict:
-    #     return self._operations_with_objects.getList("personnel.employee").json()
+    def get_employees(self) -> dict:
+        return self._operations_with_objects.getList("personnel.employee").json()
 
-    # def _get_system_object(self, url: str) -> requests.Response:
-    #     return self._api.get(f"api/list?moduleName={url}")
+    def _get_system_object(self, url: str) -> requests.Response:
+        return self._api.get(f"api/list?moduleName={url}")
