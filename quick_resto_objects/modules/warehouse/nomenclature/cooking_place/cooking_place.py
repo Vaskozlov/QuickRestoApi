@@ -1,4 +1,4 @@
-from quick_resto_objects.modules.front.terminals.terminal_device import TerminalDevice
+from quick_resto_objects.modules.front.terminals.ipad.terminal import Terminal
 from quick_resto_objects.modules.warehouse.store.store import Store
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
@@ -17,15 +17,15 @@ class CookingPlace(QuickRestoObject):
         return self._title
 
     @property
-    def backup_target_device(self) -> TerminalDevice:
+    def backup_target_device(self) -> Terminal:
         return self._backup_target_device
 
     @property
-    def doublicating_target_Device(self) -> TerminalDevice:
+    def doublicating_target_Device(self) -> Terminal:
         return self._doublicating_target_Device
 
     @property
-    def target_Device(self) -> TerminalDevice:
+    def target_Device(self) -> Terminal:
         return self._target_Device
 
     def __init__(self, sendSignal: bool = None, title: str = None, store: dict = None, backupTargetDevice: dict = None,
@@ -35,11 +35,11 @@ class CookingPlace(QuickRestoObject):
         super().__init__(class_name=class_name, **kwargs)
         self._send_signal = sendSignal
         self._title = title
-        self._backup_target_device = backupTargetDevice
-        self._target_Device = targetDevice
+        if backupTargetDevice != None: self._backup_target_device = Terminal(**backupTargetDevice)
+        if targetDevice != None: self._target_Device = Terminal(**targetDevice)
 
         if store != None:
             self._store = Store(**store)
 
         if doublicatingTargetDevice != None:
-            self._doublicating_target_Device = TerminalDevice(**doublicatingTargetDevice)
+            self._doublicating_target_Device = Terminal(**doublicatingTargetDevice)

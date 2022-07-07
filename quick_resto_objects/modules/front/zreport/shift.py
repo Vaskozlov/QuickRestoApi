@@ -1,6 +1,6 @@
 from enum import Enum
+from quick_resto_objects.modules.front.terminals.kkm.kkm_terminal import KkmTerminal
 
-from quick_resto_objects.modules.front.terminals.terminal_device import TerminalDevice
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
 
@@ -53,7 +53,7 @@ class Shift(QuickRestoObject):
         return self._incomplete
 
     @property
-    def kkm_terminal(self) -> TerminalDevice:
+    def kkm_terminal(self) -> KkmTerminal:
         return self._kkm_terminal
 
     @property
@@ -195,7 +195,7 @@ class Shift(QuickRestoObject):
         self._closed: int = closed
         self._code1_c: str = code1C
         self._incomplete: bool = incomplete
-        self._kkm_terminal: dict = TerminalDevice(**kkmTerminal)
+        self._kkm_terminal: dict = KkmTerminal(**kkmTerminal)
         self._non_fiscal_total_bonuses: int = nonFiscalTotalBonuses
         self._non_fiscal_total_card: int = nonFiscalTotalCard
         self._non_fiscal_total_cash: int = nonFiscalTotalCash

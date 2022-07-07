@@ -1,5 +1,6 @@
 from quick_resto_objects.modules.front.tablemanagement.table_scheme import TableScheme
-from quick_resto_objects.modules.front.terminals.terminal_device import TerminalDevice
+from quick_resto_objects.modules.front.terminals.ipad.terminal import Terminal
+from quick_resto_objects.modules.front.terminals.kkm.kkm_terminal import KkmTerminal
 from quick_resto_objects.modules.warehouse.nomenclature.cooking_place.cooking_place import CookingPlace
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
@@ -54,23 +55,23 @@ class SalePlace(QuickRestoObject):
         return self._table
 
     @property
-    def backup_prechecks_target_device(self) -> TerminalDevice:
+    def backup_prechecks_target_device(self) -> Terminal:
         return self._backup_prechecks_target_device
 
     @property
-    def kkm_organization1(self) -> TerminalDevice:
+    def kkm_organization1(self) -> KkmTerminal:
         return self._kkm_organization1
 
     @property
-    def kkm_organization2(self) -> TerminalDevice:
+    def kkm_organization2(self) -> KkmTerminal:
         return self._kkm_organization2
 
     @property
-    def prechecks_target_device(self) -> TerminalDevice:
+    def prechecks_target_device(self) -> Terminal:
         return self._prechecks_target_device
 
     @property
-    def report_target_device(self) -> TerminalDevice:
+    def report_target_device(self) -> Terminal:
         return self._report_target_device
 
     def __init__(self, automaticEncashment: bool = None, canHoldTableOrders: bool = None,
@@ -99,9 +100,9 @@ class SalePlace(QuickRestoObject):
         self._title: str = title
         if (tableScheme != None): self._table: TableScheme = TableScheme(**tableScheme)
 
-        if (backupPrechecksTargetDevice != None): self._backup_prechecks_target_device = TerminalDevice(
+        if (backupPrechecksTargetDevice != None): self._backup_prechecks_target_device = Terminal(
             **backupPrechecksTargetDevice)
-        if (kkmOrganization1 != None): self._kkm_organization1 = TerminalDevice(**kkmOrganization1)
-        if (kkmOrganization2 != None): self._kkm_organization2 = TerminalDevice(**kkmOrganization2)
-        if (prechecksTargetDevice != None): self._prechecks_target_device = TerminalDevice(**prechecksTargetDevice)
-        if (reportTargetDevice != None): self._report_target_device = TerminalDevice(**reportTargetDevice)
+        if (kkmOrganization1 != None): self._kkm_organization1 = KkmTerminal(**kkmOrganization1)
+        if (kkmOrganization2 != None): self._kkm_organization2 = KkmTerminal(**kkmOrganization2)
+        if (prechecksTargetDevice != None): self._prechecks_target_device = Terminal(**prechecksTargetDevice)
+        if (reportTargetDevice != None): self._report_target_device = Terminal(**reportTargetDevice)
