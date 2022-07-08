@@ -133,9 +133,19 @@ class OrderInfo(QuickRestoObject):
         self._create_date: str = createDate
         self._document_number: int = documentNumber
         self._discount_percent: int = discountPercent
-        if (cashier != None): self._cashier = Employee(**cashier)
+        
+        if cashier is not None: 
+            self._cashier = Employee(**cashier)
+        else:
+            self._cashier = None
+        
         self._ext_id: str = extId
-        if (front != None): self._front = Terminal(**front)
+
+        if front is not None: 
+            self._front = Terminal(**front)
+        else:
+            self._front = None
+
         self._front_sum: int = frontSum
         self._front_total_absolute_charge: int = frontTotalAbsoluteCharge
         self._front_total_absolute_discount: int = frontTotalAbsoluteDiscount
@@ -150,9 +160,23 @@ class OrderInfo(QuickRestoObject):
         self._reopened_order_doc_id: str = reopenedOrderDocId
         self._returned: bool = returned
         self._return_order_doc_id: str = returnOrderDocId
-        if (shift != None): self._shift = Shift(**shift)
+
+        if shift is not None: 
+            self._shift = Shift(**shift)
+        else:
+            self._shift = None
+
         self._shift_id: str = shiftId
-        if (table != None): self._table = Table(**table)
+        
+        if table is not None: 
+            self._table = Table(**table)
+        else:
+            self._table = None
+
         self._table_order_doc_id: str = tableOrderDocId
         self._total_sum: int = totalSum
-        if (waiter != None): self._waiter = Employee(**waiter)
+
+        if waiter is not None: 
+            self._waiter = Employee(**waiter)
+        else:
+            self._waiter = None

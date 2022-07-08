@@ -9,5 +9,13 @@ class DishSale(QuickRestoObject):
 
         super().__init__(class_name=class_name, **kwargs)
         self._price: float = price
-        if (salePlace != None): self._sale_place: SalePlace = SalePlace(**salePlace)
-        if (cookingPlace != None): self._cooking_place: CookingPlace = CookingPlace(**cookingPlace)
+
+        if salePlace is not None: 
+            self._sale_place: SalePlace = SalePlace(**salePlace)
+        else:
+            self._sale_place = None
+
+        if cookingPlace is not None: 
+            self._cooking_place: CookingPlace = CookingPlace(**cookingPlace)
+        else:
+            self._cooking_place = None

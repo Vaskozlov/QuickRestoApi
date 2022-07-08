@@ -29,12 +29,18 @@ class Hall(QuickRestoObject):
 
     def __init__(self, version: int = None, deleted: bool = None, tables: list = None, width: int = None,
                  height: int = None, title: str = None, **kwargs):
-        class_name = ""
+        class_name = "ru.edgex.quickresto.modules.front.tablemanagement.Hall"
+        
         super().__init__(class_name=class_name, **kwargs)
 
         self._version: int = version
         self._deleted: bool = deleted
-        if (tables != None): self._tables: list = [Table(**value) for value in tables]
+        
+        if tables is not None: 
+            self._tables: list = [Table(**value) for value in tables]
+        else:
+            self._tables = None
+
         self._width: int = width
         self._height: int = height
         self._title: str = title

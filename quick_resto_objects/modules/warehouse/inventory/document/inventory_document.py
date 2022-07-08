@@ -57,7 +57,12 @@ class InventoryDocument(QuickRestoObject):
 
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        if (store != None): self._store = Store(**store)
+
+        if store is not None: 
+            self._store = Store(**store)
+        else:
+            self._store = None
+        
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

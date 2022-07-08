@@ -1,4 +1,5 @@
 from enum import Enum
+from quick_resto_objects.modules.front.terminals.kkm.kkm_terminal import KkmTerminal
 
 from quick_resto_objects.modules.front.zreport.shift import Shift
 from quick_resto_objects.modules.personnel.employee.employee import Employee
@@ -47,7 +48,7 @@ class Encashment(QuickRestoObject):
         return self._employee
 
     @property
-    def kkm(self) -> dict:
+    def kkm(self) -> KkmTerminal:
         return self._kkm
 
     @property
@@ -73,8 +74,25 @@ class Encashment(QuickRestoObject):
         self._amount: int = amount
         self._number: int = number
         self._boolean: bool = boolean
-        if (employee != None): self._employee = Employee(**employee)
-        if (kkm != None): self._kkm: dict = kkm
-        if (salePlace != None): self.__sale_place = SalePlace(**salePlace)
-        if (shift != None): self._shift = Shift(**shift)
+
+        if employee is not None: 
+            self._employee = Employee(**employee)
+        else:
+            self._employee = None
+
+        if kkm is not None: 
+            self._kkm = KkmTerminal(**kkm)
+        else:
+            self._kkm = None
+
+        if salePlace is not None: 
+            self._sale_place = SalePlace(**salePlace)
+        else:
+            self._sale_place = None
+
+        if shift is not None: 
+            self._shift = Shift(**shift)
+        else:
+            self._shift = None
+
         self._type_transaction = convert_str_to__encashment_Type(typeTransaction)

@@ -39,4 +39,8 @@ class Role(QuickRestoObject):
         self._back_office_user: bool = backOfficeUser
         self._front_office_user: bool = frontOfficeUser
         self._courier_user: bool = courierUser
-        if (rightLinks != None): self._right_links: list = [RightLink(**value) for value in rightLinks]
+
+        if rightLinks is not None: 
+            self._right_links: list = [RightLink(**value) for value in rightLinks]
+        else:
+            self._right_links = None

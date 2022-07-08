@@ -104,7 +104,12 @@ class Modifier(QuickRestoObject):
         self._min_value = minValue
         self._max_value = maxValue
         self._with_dish = withDish
-        if (modifierSales != None): self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
+
+        if modifierSales is not None:
+            self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
+        else:
+            self._modifier_sales = None
+
         self._item_title = itemTitle
         self._article = article
         self._titleInPrice = titleInPrice
@@ -118,7 +123,7 @@ class Modifier(QuickRestoObject):
         self._recipe = recipe
         self._price = price
 
-        if storeItemTag is None:
-            self._store_item_tag = None
-        else:
+        if storeItemTag is not None:
             self._store_item_tag = StoreItemTag(**storeItemTag)
+        else:
+            self._store_item_tag = None

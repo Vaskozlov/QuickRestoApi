@@ -72,5 +72,10 @@ class PreorderInfo(QuickRestoObject):
         self._print_time: int = printTime
         self._sum: int = sum
         self._sum_with_discount: int = sumWithDiscount
-        if (table != None): self._table = Table(**table)
+
+        if table is not None: 
+            self._table = Table(**table)
+        else:
+            self._table = None
+            
         self._table_order_doc_id: str = tableOrderDocId

@@ -83,8 +83,17 @@ class VirtualPosTerminal(QuickRestoObject):
         self._deleted: bool = deleted
         self._activate_on_current_terminal: bool = activateOnCurrentTerminal
         self._state: str = state
-        if (tableScheme != None): self._table_scheme = TableScheme(**tableScheme)
-        if (command != None): self._command = DeviceCommand(**command)
+
+        if tableScheme is not None: 
+            self._table_scheme = TableScheme(**tableScheme)
+        else:
+            self._table_scheme = None
+
+        if command is not None: 
+            self._command = DeviceCommand(**command)
+        else:
+            self._command = None
+
         self._business: dict = business
         self._connection_kind: str = connectionKind
         self._pos_additional_info: str = posAdditionalInfo

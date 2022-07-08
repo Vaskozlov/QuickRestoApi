@@ -103,12 +103,20 @@ class PaymentType(QuickRestoObject):
         self._customer_type: str = customerType
         self._payment_mechanism_web: str = paymentMechanismWeb
         self._allowed_organizations_web: list = allowedOrganizationsWeb
-        if (allowedSalePlacesWeb != None): self._allowed_sale_places_web: list = [SalePlace(**place) for place in
-                                                                                  allowedSalePlacesWeb]
+
+        if allowedSalePlacesWeb is not None: 
+            self._allowed_sale_places_web: list = [SalePlace(**place) for place in allowedSalePlacesWeb]
+        else:
+            self._allowed_sale_places_web = None
+        
         self._employee_roles_web: list = employeeRolesWeb
         self._concrete_employees_web: list = concreteEmployeesWeb
-        if (allowedUserRolesWeb != None): self._allowed_user_roles_web: list = [Role(**value) for value in
-                                                                                allowedUserRolesWeb]
+
+        if allowedUserRolesWeb is not None: 
+            self._allowed_user_roles_web: list = [Role(**value) for value in allowedUserRolesWeb]
+        else:
+            self._allowed_user_roles_web = None
+
         self._allowed_concrete_users_web: list = allowedConcreteUsersWeb
         self._guest_groups_web: list = guestGroupsWeb
         self._concrete_guests_web: list = concreteGuestsWeb

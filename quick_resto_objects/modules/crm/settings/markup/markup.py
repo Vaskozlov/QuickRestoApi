@@ -106,10 +106,38 @@ class Markup(QuickRestoObject):
         self._type_discount = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
         self._operator_cancellable: bool = operatorCancellable
-        if (dateRange != None): self._date_range: dict = TimeRange(**dateRange)
-        if (categories != None): self._categories: list = [DishCategory(**category) for category in categories]
-        if (dishes != None): self._dishes: list = [Dish(**dish) for dish in dishes]
-        if (tags != None): self._tags: list = [StoreItemTag(**tag) for tag in tags]
-        if (modifierGroups != None): self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        if (salePlaces != None): self._sale_places: list = [SalePlace(**place) for place in salePlaces]
-        if (days != None): self._days: list = [Day(**day) for day in days]
+
+        if dateRange is not None: 
+            self._date_range = TimeRange(**dateRange)
+        else:
+            self._date_range = None
+
+        if categories is not None: 
+            self._categories: list = [DishCategory(**category) for category in categories]
+        else:
+            self._categories = None
+
+        if dishes is not None: 
+            self._dishes: list = [Dish(**dish) for dish in dishes]
+        else:
+            self._dishes = None
+
+        if tags is not None: 
+            self._tags: list = [StoreItemTag(**tag) for tag in tags]
+        else:
+            self._tags = None
+
+        if modifierGroups is not None: 
+            self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        else:
+            self._modifier_groups = None
+
+        if salePlaces is not None: 
+            self._sale_places: list = [SalePlace(**place) for place in salePlaces]
+        else:
+            self._sale_places = None
+
+        if days is not None: 
+            self._days: list = [Day(**day) for day in days]
+        else:
+            self._days = None

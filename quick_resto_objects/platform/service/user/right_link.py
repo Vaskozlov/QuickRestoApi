@@ -12,4 +12,7 @@ class RightLink(QuickRestoObject):
 
         super().__init__(class_name=class_name, **kwargs)
 
-        if (right != None): self._right: dict = Right(**right)
+        if right is not None: 
+            self._right = Right(**right)
+        else:
+            self._right = None

@@ -1,7 +1,6 @@
 from quick_resto_objects.modules.core.dictionaries.measureunits.measure_unit import MeasureUnit
 from quick_resto_objects.quick_resto_object import QuickRestoObject
 
-
 class PackingUnit(QuickRestoObject):
     @property
     def version(self) -> int:
@@ -28,4 +27,8 @@ class PackingUnit(QuickRestoObject):
         self._version: int = version
         self._name: str = name
         self._parent_ratio: float = parentRatio
-        if (parentUnit != None): self._parent_unit: dict = MeasureUnit(**parentUnit)
+
+        if parentUnit is not None: 
+            self._parent_unit = MeasureUnit(**parentUnit)
+        else:
+            self._parent_unit = None

@@ -76,15 +76,41 @@ class BonusProgram(QuickRestoObject):
 
         self._name: str = name
         self._deleted: bool = deleted
-        if (days != None): self._days: list = [Day(**day) for day in days]
-        if (groups != None): self._groups: list = [Group(**group) for group in groups]
+
+        if days is not None: 
+            self._days: list = [Day(**day) for day in days]
+        else:
+            self._days = None 
+
+        if groups is not None: 
+            self._groups: list = [Group(**group) for group in groups]
+        else:
+            self._groups = None
+
         self._start_date: str = startDate
         self._end_date: str = endDate
         self._acc_value: float = accValue
-        if (accountType != None): self._account_type: dict = AccountType(**accountType)
+
+        if accountType is not None: 
+            self._account_type: dict = AccountType(**accountType)
+        else:
+            self._account_type = None
+
         self._do_not_accumulate_while_redeeming: bool = doNotAccumulateWhileRedeeming
         self._greeting_bonus: float = greetingBonus
         self._birthday_bonus: float = birthdayBonus
-        if (categories != None): self._categories: list = [DishCategory(**category) for category in categories]
-        if (dishes != None): self._dishes: list = [Dish(**dish) for dish in dishes]
-        if (tags != None): self._tags: list = [StoreItemTag(**tag) for tag in tags]
+
+        if categories is not None: 
+            self._categories = [DishCategory(**category) for category in categories]
+        else:
+            self._categories = None
+
+        if dishes is not None: 
+            self._dishes: list = [Dish(**dish) for dish in dishes]
+        else:
+            self._dishes = None
+
+        if tags is not None: 
+            self._tags: list = [StoreItemTag(**tag) for tag in tags]
+        else:
+            self._tags = None

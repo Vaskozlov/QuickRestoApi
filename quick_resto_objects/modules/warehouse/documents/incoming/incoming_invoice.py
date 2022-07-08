@@ -74,3 +74,7 @@ class IncomingInvoice(QuickRestoObject):
                 self._provider = Organization
             elif provider is ProviderGroup:
                 self._provider = ProviderGroup(**provider)
+            else:
+                provider = None
+        else:
+                provider = None

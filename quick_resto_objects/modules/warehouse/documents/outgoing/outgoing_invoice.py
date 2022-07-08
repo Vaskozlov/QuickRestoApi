@@ -110,8 +110,12 @@ class OutgoingInvoice(QuickRestoObject):
         self._comment: str = comment
         self._total_amount: float = totalAmount
 
-        if store is not None:
+        if store is not None: 
             self._store = Store(**store)
+        else:
+            self._store = None
 
         if customerType is not None:
             self._customer_type: CustomerType = convert_str_to_customer_type(customerType)
+        else:
+            self._customer_type = None

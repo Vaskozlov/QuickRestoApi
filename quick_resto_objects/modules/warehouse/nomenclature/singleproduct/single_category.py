@@ -37,8 +37,17 @@ class SingleCategory(QuickRestoObject):
         self._version: int = version
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
-        if (measureUnit != None): self._measure_unit = MeasureUnit(**measureUnit)
-        if (storeItemTag != None): self._store_item_tag: dict = StoreItemTag(**storeItemTag)
+
+        if measureUnit is not None: 
+            self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        else:
+            self._measure_unit = None
+
+        if storeItemTag is not None:
+            self._store_item_tag = StoreItemTag(**storeItemTag)
+        else:
+            self._store_item_tag = None
+
         self._color: str = color
         self._display_on_terminal: bool = displayOnTerminal
         self._item_title: str = itemTitle

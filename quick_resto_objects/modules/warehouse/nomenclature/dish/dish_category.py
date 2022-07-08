@@ -70,15 +70,20 @@ class DishCategory(QuickRestoObject):
         self._name: str = name
         self._color: str = color
         self._display_on_terminal: bool = displayOnTerminal
-        if (measureUnit != None): self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+
+        if measureUnit is not None: 
+            self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        else:
+            self._measure_unit = None
+
         self._selling_type: SellingType = convert_str_to_selling_type(sellingType)
 
-        if storeItemTag is None:
-            self._store_item_tag = None
-        else:
+        if storeItemTag is not None:
             self._store_item_tag = StoreItemTag(**storeItemTag)
-
-        if dishSales is None:
-            self._dish_sales = None
         else:
+            self._store_item_tag = None
+
+        if dishSales is not None:
             self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
+        else:
+            self._dish_sales = None

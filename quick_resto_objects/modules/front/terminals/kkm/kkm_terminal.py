@@ -54,4 +54,8 @@ class KkmTerminal(QuickRestoObject):
         self._deleted: bool = deleted
         self._activate_on_current_terminal: bool = activateOnCurrentTerminal
         self._state: str = state
-        if (command != None): self._command = DeviceCommand(**command)
+
+        if command is not None: 
+            self._command = DeviceCommand(**command)
+        else:
+            self._command = None

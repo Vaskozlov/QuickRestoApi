@@ -95,11 +95,21 @@ class Dish(QuickRestoObject):
         super().__init__(class_name=class_name, **kwargs)
         if (article != None): self._article: int = int(article)
         self._base_price_in_list: float = basePriceInList
-        if (dishSales != None): self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
+
+        if dishSales is not None:
+            self._dish_sales: list = [DishSale(**dish_sale) for dish_sale in dishSales]
+        else:
+            self._dish_sales = None
+
         self._display_on_terminal: bool = displayOnTerminal
         self._exclude_discount: bool = excludeDiscount
         self._exclude_markup: bool = excludeMarkup
-        if (measureUnit != None): self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+
+        if measureUnit is not None: 
+            self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        else:
+            self._measure_unit = None
+
         self._minimal_price: float = minimalPrice
         self._name: str = name
         self._pack: float = pack
@@ -110,10 +120,14 @@ class Dish(QuickRestoObject):
         self._selling_type: SellingType = convert_str_to_selling_type(sellingType)
         self._store_quantity_kg: float = storeQuantityKg
 
-        if storeItemTag is None:
-            self._store_item_tag = None
-        else:
+        if storeItemTag is not None:
             self._store_item_tag = StoreItemTag(**storeItemTag)
+        else:
+            self._store_item_tag = None
 
         self._parent_id = parentId
-        if (parentItem != None): self._parent_item = DishCategory(**parentItem)
+
+        if parentItem is not None: 
+            self._parent_item = DishCategory(**parentItem)
+        else:
+            self._parent_item = None

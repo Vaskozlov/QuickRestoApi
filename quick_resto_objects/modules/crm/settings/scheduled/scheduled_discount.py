@@ -1,3 +1,4 @@
+from quick_resto_objects.modules.core.dictionaries.storeitemtag.store_item_tag import StoreItemTag
 from quick_resto_objects.modules.crm.settings.fixed.fixed_discount import convert_str_to_type_discount, TypeDiscount
 from quick_resto_objects.modules.crm.settings.markup.markup import Day, TimeRange
 from quick_resto_objects.modules.warehouse.nomenclature.dish.dish import Dish
@@ -68,12 +69,41 @@ class ScheduledDiscount(QuickRestoObject):
         self._name: str = name
         self._deleted: bool = deleted
         self._type_discount = convert_str_to_type_discount(typeDiscount)
-        if (dateRange != None): self._date_range = TimeRange(**dateRange)
+
+        if dateRange is not None: 
+            self._date_range = TimeRange(**dateRange)
+        else:
+            self._date_range = None
+
         self._operator_cancellable = operatorCancellable
         self._value: float = value
-        if (categories != None): self._categories: set = [DishCategory(**category) for category in categories]
-        self._dishes: set = [Dish(**dish) for dish in dishes]
-        self._tags: set = tags
-        if (modifierGroups != None): self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        if (salePlaces != None): self._sale_places: set = [SalePlace(**place) for place in salePlaces]
-        if (days != None): self._days: list = [Day(**day) for day in days]
+
+        if categories is not None: 
+            self._categories: set = [DishCategory(**category) for category in categories]
+        else:
+            self._categories = None
+
+        if dishes is not None:
+            self._dishes: set = [Dish(**dish) for dish in dishes]
+        else:
+            self._dishes = None
+
+        if tags is not None:
+            self._tags: set = [StoreItemTag(**value) for value in tags]
+        else:
+            self._tags = None
+
+        if modifierGroups is not None: 
+            self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        else:
+            self._modifier_groups = None
+
+        if salePlaces is not None: 
+            self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+        else:
+            self._sale_places = None
+
+        if days is not None: 
+            self._days: list = [Day(**day) for day in days]
+        else:
+            self._days = None

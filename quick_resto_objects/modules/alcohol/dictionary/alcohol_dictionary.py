@@ -38,4 +38,8 @@ class AlcoholDictionary(QuickRestoObject):
         self._egais_size: int = egaisSize
         self._egais_type_code: str = egaisTypeCode
         self._show_on_terminal: bool = showOnTerminal
-        if (storeProduct != None): self._store_product: dict = Dish(**storeProduct)
+
+        if storeProduct is not None:
+            self._store_product = Dish(**storeProduct)
+        else:
+            self._store_product = None

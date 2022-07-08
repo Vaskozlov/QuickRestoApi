@@ -42,6 +42,11 @@ class Cancellation(QuickRestoObject):
         self._description: str = description
         self._parent_order_doc_id: str = parentOrderDocId
         self._with_dismission: bool = withDismission
-        if (employee != None): self._employee = Employee(**employee)
+
+        if employee is not None: 
+            self._employee = Employee(**employee)
+        else:
+            self._employee = None
+
         self._parent_return_order_doc_id: str = parentReturnOrderDocId
         self._table_order_doc_id: str = tableOrderDocId

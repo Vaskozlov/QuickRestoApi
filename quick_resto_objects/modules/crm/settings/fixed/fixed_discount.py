@@ -78,9 +78,30 @@ class FixedDiscount(QuickRestoObject):
         self._deleted: bool = deleted
         self._type_discount = convert_str_to_type_discount(typeDiscount)
         self._value: float = value
-        if (categories != None): self._categories: set = [DishCategory(**category) for category in categories]
-        if (dishes != None): self._dishes: set = [Dish(**dish) for dish in dishes]
-        if (tags != None): self._tags: set = tags
-        if (modifierGroups != None): self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
-        if (salePlaces != None): self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+
+        if categories is not None: 
+            self._categories: set = [DishCategory(**category) for category in categories]
+        else:
+            self._categories = None
+
+        if dishes is not None: 
+            self._dishes: set = [Dish(**dish) for dish in dishes]
+        else:
+            self._dishes
+
+        if tags is not None: 
+            self._tags: set = tags
+        else:
+            self._tags = None
+
+        if modifierGroups is not None: 
+            self._modifier_groups: list = [ModifierGroup(**group) for group in modifierGroups]
+        else:
+            self._modifier_groups = None
+
+        if salePlaces is not None: 
+            self._sale_places: set = [SalePlace(**place) for place in salePlaces]
+        else:
+            self._sale_places = None
+
         self._index: int = index

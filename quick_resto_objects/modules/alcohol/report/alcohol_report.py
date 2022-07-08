@@ -28,4 +28,8 @@ class AlcoholReport(QuickRestoObject):
         self._deleted: bool = deleted
         self._tap_time: int = tapTime
         self._count: int = count
-        if (alcoholDictionary != None): self._alcohol_dictionary: dict = AlcoholDictionary(**alcoholDictionary)
+        
+        if alcoholDictionary is not None: 
+            self._alcohol_dictionary = AlcoholDictionary(**alcoholDictionary)
+        else:
+            self._alcohol_dictionary = None

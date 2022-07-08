@@ -117,10 +117,23 @@ class TicketDevice(QuickRestoObject):
         self._deleted: bool = deleted
         self._name: str = name
         self._serial_number: str = serialNumber
-        if (command != None): self._command = DeviceCommand(**command)
-        if (tableScheme != tableScheme): self._table_scheme = TableScheme(**tableScheme)
+
+        if tableScheme is not None: 
+            self._table_scheme = TableScheme(**tableScheme)
+        else:
+            self._table_scheme = None
+
+        if tableScheme is not None: 
+            self._table_scheme = TableScheme(**tableScheme)
+        else:
+            self._table_scheme = None
+
         self._business: dict = business
         self._state = convert_str_to_hardware_state(state)
         self._kkm_mode: bool = kkmMode
         self._symbols_per_line: int = symbolsPerLine
-        if (organization != organization): self._organization = Organization(**organization)
+
+        if organization is not None: 
+            self._organization = Organization(**organization)
+        else:
+            self._organization = None

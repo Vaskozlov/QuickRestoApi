@@ -195,7 +195,12 @@ class Shift(QuickRestoObject):
         self._closed: int = closed
         self._code1_c: str = code1C
         self._incomplete: bool = incomplete
-        self._kkm_terminal: dict = KkmTerminal(**kkmTerminal)
+
+        if kkmTerminal is not None:
+            self._kkm_terminal = KkmTerminal(**kkmTerminal)
+        else:
+            self._kkm_terminal = None
+
         self._non_fiscal_total_bonuses: int = nonFiscalTotalBonuses
         self._non_fiscal_total_card: int = nonFiscalTotalCard
         self._non_fiscal_total_cash: int = nonFiscalTotalCash

@@ -35,11 +35,23 @@ class CookingPlace(QuickRestoObject):
         super().__init__(class_name=class_name, **kwargs)
         self._send_signal = sendSignal
         self._title = title
-        if backupTargetDevice != None: self._backup_target_device = Terminal(**backupTargetDevice)
-        if targetDevice != None: self._target_Device = Terminal(**targetDevice)
 
-        if store != None:
+        if backupTargetDevice is not None: 
+            self._backup_target_device = Terminal(**backupTargetDevice)
+        else:
+            self._backup_target_device = None
+
+        if targetDevice is not None: 
+            self._target_Device = Terminal(**targetDevice)
+        else:
+            self._target_Device = None
+
+        if store is not None:
             self._store = Store(**store)
+        else:
+            self._store = None
 
-        if doublicatingTargetDevice != None:
+        if doublicatingTargetDevice is not None:
             self._doublicating_target_Device = Terminal(**doublicatingTargetDevice)
+        else:
+            self._doublicating_target_Device = None

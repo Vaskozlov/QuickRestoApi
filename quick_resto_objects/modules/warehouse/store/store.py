@@ -27,4 +27,8 @@ class Store(QuickRestoObject):
         self._title: str = title
         self._description: str = description
         self._store_code: int = int(storeCode)
-        self._lite_business: Employee = Employee(**liteBusiness)
+        
+        if liteBusiness is not None:
+            self._lite_business: Employee = Employee(**liteBusiness)
+        else:
+            self._lite_business = None

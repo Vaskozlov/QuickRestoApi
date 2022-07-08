@@ -51,10 +51,19 @@ class DecompositionInvoice(QuickRestoObject):
 
         super().__init__(class_name=class_name, **kwargs)
 
-        if (fromStore != None): self._from_store = Store(**fromStore)
+        if fromStore is not None: 
+            self._from_store = Store(**fromStore)
+        else:
+            self._from_store = None
+
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
-        if (store != None): self._store = Store(**store)
+
+        if store is not None: 
+            self._store = Store(**store)
+        else:
+            self._store = None
+
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds

@@ -58,5 +58,13 @@ class TableScheme(QuickRestoObject):
         self._max_capacity: int = maxCapacity
         self._name: str = name
         self._reservations: list = reservations
-        self._tables: list = [Table(**table) for table in tables]
-        if (halls != None): self._halls: list = [Hall(**value) for value in halls]
+
+        if tables is not None: 
+            self._tables: list = [Table(**value) for value in tables]
+        else:
+            self._tables = None
+
+        if halls is not None: 
+            self._halls: list = [Hall(**value) for value in halls]
+        else:
+            self._halls = None

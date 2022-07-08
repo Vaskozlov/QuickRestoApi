@@ -88,8 +88,12 @@ class SalePlace(QuickRestoObject):
         super().__init__(class_name=class_name, **kwargs)
         self._automatic_encashment: bool = automaticEncashment
         self._can_hold_table_orders: bool = canHoldTableOrders
-        if (defaultCookingPlace != None): self._default_cooking_place: CookingPlace = CookingPlace(
-            **defaultCookingPlace)
+
+        if defaultCookingPlace is not None: 
+            self._default_cooking_place: CookingPlace = CookingPlace(**defaultCookingPlace)
+        else:
+            self._default_cooking_place = None
+
         self._max_table_order_number_enable: bool = maxTableOrderNumberEnable
         self._open_cash_box_on_guest_tickets: bool = openCashBoxOnGuestTickets
         self._open_cash_box_on_prechecks: bool = openCashBoxOnPrechecks
@@ -98,11 +102,33 @@ class SalePlace(QuickRestoObject):
         self._print_kitchen_ticket: bool = printKitchenTicket
         self._services: list = services
         self._title: str = title
-        if (tableScheme != None): self._table: TableScheme = TableScheme(**tableScheme)
 
-        if (backupPrechecksTargetDevice != None): self._backup_prechecks_target_device = Terminal(
-            **backupPrechecksTargetDevice)
-        if (kkmOrganization1 != None): self._kkm_organization1 = KkmTerminal(**kkmOrganization1)
-        if (kkmOrganization2 != None): self._kkm_organization2 = KkmTerminal(**kkmOrganization2)
-        if (prechecksTargetDevice != None): self._prechecks_target_device = Terminal(**prechecksTargetDevice)
-        if (reportTargetDevice != None): self._report_target_device = Terminal(**reportTargetDevice)
+        if tableScheme is not None: 
+            self._table: TableScheme = TableScheme(**tableScheme)
+        else:
+            self._table = None
+
+        if backupPrechecksTargetDevice is not None: 
+            self._backup_prechecks_target_device = Terminal(**backupPrechecksTargetDevice)
+        else:
+            self._backup_prechecks_target_device = None
+
+        if kkmOrganization1 is not None: 
+            self._kkm_organization1 = KkmTerminal(**kkmOrganization1)
+        else:
+            self._kkm_organization1 = None
+
+        if kkmOrganization2 is not None: 
+            self._kkm_organization2 = KkmTerminal(**kkmOrganization2)
+        else:
+            self._kkm_organization2 = None
+
+        if prechecksTargetDevice is not None: 
+            self._prechecks_target_device = Terminal(**prechecksTargetDevice)
+        else:
+            self._prechecks_target_device = None
+
+        if reportTargetDevice is not None: 
+            self._report_target_device = Terminal(**reportTargetDevice)
+        else:
+            self._report_target_device = None

@@ -73,8 +73,17 @@ class SemiProduct(QuickRestoObject):
         self._server_register_time: str = serverRegisterTime
         self._name: str = name
         self._article: str = article
-        if (measureUnit != None): self._measure_unit = MeasureUnit(**measureUnit)
-        if (storeItemTag != None): self._store_item_tag: dict = StoreItemTag(**storeItemTag)
+        
+        if measureUnit is not None: 
+            self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        else:
+            self._measure_unit = None
+
+        if storeItemTag is not None:
+            self._store_item_tag = StoreItemTag(**storeItemTag)
+        else:
+            self._store_item_tag = None
+
         self._ratio: float = ratio
         self._minimal_price: float = minimalPrice
         self._exclude_discount: bool = excludeDiscount

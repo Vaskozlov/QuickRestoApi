@@ -58,16 +58,26 @@ class ModifierGroup(QuickRestoObject):
 
         self._name = name
         self._deleted = deleted
-        self._measure_unit = measureUnit
+
+        if measureUnit is not None: 
+            self._measure_unit: MeasureUnit = MeasureUnit(**measureUnit)
+        else:
+            self._measure_unit = None
+
         self._color = color
         self._display_on_terminal = displayOnTerminal
         self._min_value = minValue
         self._max_value = maxValue
         self._with_dish = withDish
-        if (modifierSales != None): self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
+
+        if modifierSales is not None:
+            self._modifier_sales: list = [DishSale(**dish_sale) for dish_sale in modifierSales]
+        else:
+            self._modifier_sales = None
+        
         self._item_title = itemTitle
 
-        if storeItemTag is None:
-            self._store_item_tag = None
-        else:
+        if storeItemTag is not None:
             self._store_item_tag = StoreItemTag(**storeItemTag)
+        else:
+            self._store_item_tag = None

@@ -114,6 +114,15 @@ class CrmCustomer(QuickRestoObject):
         self._sex: CrmCustomerSex = convert_str_to_crm_customer_sex(sex)
         self._comment: str = comment
         self._date_of_birth: str = dateOfBirth
-        if (tokens != None): self._tokens: list = [CustomerToken(**token) for token in tokens]
+
+        if tokens is not None: 
+            self._tokens: list = [CustomerToken(**token) for token in tokens]
+        else:
+            self._tokens = None
+
         self._customer_type: CrmCustomerType = convert_str_to_crm_customer_type(type)
-        if (customerGroup != None): self._group: Group = Group(**customerGroup)
+
+        if customerGroup is None: 
+            self._group: Group = Group(**customerGroup)
+        else:
+            self._group = None

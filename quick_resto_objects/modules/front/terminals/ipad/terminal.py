@@ -108,7 +108,11 @@ class Terminal(QuickRestoObject):
 
         super().__init__(class_name=class_name, **kwargs)
 
-        if (cookingPlace != None): self._cooking_place = CookingPlace(**cookingPlace)
+        if cookingPlace is not None: 
+            self._cooking_place = CookingPlace(**cookingPlace)
+        else:
+            self._cooking_place = None
+
         self._deleted: bool = deleted
         self._device_manufacturer: str = deviceManufacturer
         self._device_model: str = deviceModel
@@ -116,8 +120,18 @@ class Terminal(QuickRestoObject):
         self._name: str = name
         self._online: bool = online
         self._registration_date: str = registrationDate
-        if (salePlace != None): self._sale_place = SalePlace(**salePlace)
+
+        if salePlace is not None: 
+            self._sale_place = SalePlace(**salePlace)
+        else:
+            self._sale_place = None
+
         self._short_name: str = shortName
-        if (tableScheme != None): self._table_scheme = TableScheme(**tableScheme)
+
+        if tableScheme is not None: 
+            self._table_scheme = TableScheme(**tableScheme)
+        else:
+            self._table_scheme = None
+
         self._terminal_subtype = convert_str_to_terminal_subtype(terminalSubtype)
         self._terminal_type = convert_str_to_terminal_type(terminalType)

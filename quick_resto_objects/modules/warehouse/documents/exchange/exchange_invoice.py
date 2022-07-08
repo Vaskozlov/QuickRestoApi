@@ -59,8 +59,12 @@ class ExchangeInvoice(QuickRestoObject):
         self._comment = comment
         self._total_amount = totalAmount
 
-        if fromStore is not None:
+        if fromStore is not None: 
             self._from_store = Store(**fromStore)
+        else:
+            self._from_store = None
 
-        if store != store:
+        if store is not None: 
             self._store = Store(**store)
+        else:
+            self._store = None

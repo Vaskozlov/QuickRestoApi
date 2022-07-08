@@ -73,7 +73,12 @@ class DiscardInvoice(QuickRestoObject):
         self._document_number: str = documentNumber
         self._invoice_date: str = invoiceDate
         self._customer_type = convert_str_to_customer_type(customerType)
-        if (store != None): self._store = Store(**store)
+
+        if store is not None: 
+            self._store = Store(**store)
+        else:
+            self._store = None
+
         self._processed: bool = processed
         self._total_sum: float = totalSum
         self._total_sum_wo_nds: float = totalSumWoNds
