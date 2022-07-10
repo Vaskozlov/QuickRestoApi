@@ -1,0 +1,8 @@
+setup.py
+quick_resto_api/__init__.py
+quick_resto_api/quick_resto_api.py
+quick_resto_api/quick_resto_interface.py
+quick_resto_api.egg-info/PKG-INFO
+quick_resto_api.egg-info/SOURCES.txt
+quick_resto_api.egg-info/dependency_links.txt
+quick_resto_api.egg-info/top_level.txt
